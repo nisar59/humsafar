@@ -1,0 +1,18 @@
+{
+    "Users": true,
+    "Roles": true,
+    "Settings": true,
+    "Desks": true,
+    "Packages": true,
+    "Areas": true,
+    "Regions": true,
+    "Branches": true,
+    "Clients": true,
+    "Deposits": true,
+    "ClientsSubscriptions": true,
+    "Logs": true,
+    "Feedback": true,
+    "FeedbackQuestions": true,
+    "Trash": true,
+    "Banks": true
+}

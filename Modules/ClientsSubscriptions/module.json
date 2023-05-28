@@ -1,0 +1,11 @@
+{
+    "name": "ClientsSubscriptions",
+    "alias": "clientssubscriptions",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ClientsSubscriptions\\Providers\\ClientsSubscriptionsServiceProvider"
+    ],
+    "files": []
+}

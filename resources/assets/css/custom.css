@@ -1,0 +1,37 @@
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3VzdG9tLmNzcyIsInNvdXJjZXMiOlsiY3VzdG9tLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiJ9 */
+
+/*# sourceMappingURL=custom.css.map */
+
+td{
+	word-break: break-all;
+}
+.accordion .accordion-header .removepro{
+	margin-top: -18px;
+}
+.theme-white .accordion .accordion-header[aria-expanded="true"] a{
+	color: white;
+}
+.readonly{
+background-color: white !important;
+}
+.card .card-header .btn:not(.note-btn){
+	border-radius: 5px;
+}
+#sale-loader {
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  z-index: 1111;
+  left: 50%;
+  position: absolute;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
