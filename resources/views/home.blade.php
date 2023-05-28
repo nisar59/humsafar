@@ -14,6 +14,7 @@ Dashboard
     </div>
   </div>
 </div>
+
 <!-- end page title -->
 <div class="row">
   <div class="col-xl-3 col-md-6">
