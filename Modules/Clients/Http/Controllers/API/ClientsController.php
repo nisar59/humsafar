@@ -72,6 +72,16 @@ class ClientsController extends Controller
     {
         try {
 
+            $val = Validator::make($req->all(),[
+                'phone'=>'required',
+            ]);
+            $res=['success'=>true,'message'=>null,'errors'=>[],'data'=>null];
+        
+            if ($val->fails()) {
+                $res=['success'=>false,'message'=>'Required fields are missing','errors'=>$val->messages()->all(),'data'=>null];
+                return response()->json($res);
+            }
+
            $otp=Settings()->sms_notifications==1 ? GenerateOTP() : 123 ;
 
             $msg="Your OTP code for ".Settings()->portal_name." app is ".$otp." For any issues, contact us at ".Settings()->portal_email;
