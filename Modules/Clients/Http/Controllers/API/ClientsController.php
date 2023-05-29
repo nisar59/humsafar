@@ -76,15 +76,15 @@ class ClientsController extends Controller
 
             $msg="Your OTP code for ".Settings()->portal_name." app is ".$otp." For any issues, contact us at ".Settings()->portal_email;
             $result=SendMessage($req->phone, $msg);
+            $data=[
+                'otp'=>$otp
+            ];
             if($result->success){
-                $res=['success'=>true,'message'=>"OTP sent Successfully",'errors'=>[],'data'=>null];
+                $res=['success'=>true,'message'=>"OTP sent Successfully",'errors'=>[],'data'=>$data];
             }
             else{
                 $res=['success'=>false,'message'=>"Something went wrong while sending OTP with this error :".$result->message,'errors'=>[],'data'=>null];
             }
-
-
-        $res=['success'=>true,'message'=>'Education and Province Districts List is fetched','errors'=>[],'data'=>$data];
 
             return response()->json($res);
 
