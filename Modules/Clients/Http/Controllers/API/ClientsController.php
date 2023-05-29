@@ -128,7 +128,6 @@ class ClientsController extends Controller
             'monthly_income'=>'required',
             'address'=>'required',
             'medical_expense'=>'required',
-
         ]);
         $res=['success'=>true,'message'=>null,'errors'=>[],'data'=>null];
         
