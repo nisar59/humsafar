@@ -34,7 +34,8 @@ class AuthController extends Controller
                 elseif(User::where('cnic',$req->cnic)->where('phone',$req->phone)->first()!=null){
                     //$otp=GenerateOTP();
                     $otp=1234;
-                    $msg="Your Tele Health OTP is ".$otp." Please don't share with anyone";
+
+                    $msg="Your OTP code for ".Settings()->portal_name." app is ".$otp." For any issues, contact us at ".Settings()->portal_email;
                     $result=SendMessage($req->phone, $msg);
                     if($result->success){
                         $res=['success'=>true,'message'=>"OTP sent Successfully",'errors'=>[],'data'=>null];
