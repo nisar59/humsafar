@@ -109,12 +109,14 @@ class PackagesController extends Controller
             'title'=>['required','unique:packages'],
             'amount'=>['required','numeric'],
             'subscription_type'=>['required'],
-            'subscription_duration'=>['required', 'numeric'],
+            //'subscription_duration'=>['required', 'numeric'],
             ]);
 
             DB::beginTransaction();
             try {
-                Packages::create($request->all());
+                $inputs=$request->all();
+                $inputs['subscription_duration']=1;
+                Packages::create($inputs);
                 DB::commit();
                 return redirect('packages')->with('success', 'Package successfully created');
 
@@ -162,7 +164,7 @@ class PackagesController extends Controller
             'title'=>['required'],
             'amount'=>['required','numeric'],
             'subscription_type'=>['required'],
-            'subscription_duration'=>['required','numeric'],
+            //'subscription_duration'=>['required','numeric'],
         ]);
 
         DB::beginTransaction();

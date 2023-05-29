@@ -129,10 +129,10 @@ class ClientsController extends Controller
             $inputs=$req->all();
 
             $inputs['status']=0;
-            $inputs['phone_verified']=0;
+/*            $inputs['phone_verified']=0;
             if($req->phone_verified!=null){
                 $inputs['phone_verified']=1;
-            }
+            }*/
             $inputs['desk_id']=Auth::user()->desk->id;
             $inputs['dob']=Carbon::parse($req->dob);
             $client=Client::create($inputs);

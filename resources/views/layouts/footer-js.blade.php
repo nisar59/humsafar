@@ -220,5 +220,6 @@ $(".search-bar").on('change', function(){
 window.location=$(this).val();
 });
 
+$(".menu-title").hide();
 });
 </script>

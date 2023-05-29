@@ -73,8 +73,8 @@ Deposits
                 <th>Deposit Slip No</th>
                 <th>Deposit Date</th>
                 <th>Deposit slip</th>
-                <th>Subscription IDs</th>
-                <th>Verification</th>
+<!--                 <th>Subscription IDs</th>
+ -->                <th>Verification</th>
                 <th>Modified By</th>
                 <th>Action</th>
               </tr>
@@ -112,7 +112,7 @@ $(document).ready( function(){
       {data: 'deposit_slip_no', name: 'deposit_slip_no'},
       {data: 'desposit_date', name: 'desposit_date'},
       {data: 'deposit_slip', name: 'deposit_slip', class:"text-center"},
-      {data: 'client_subscription_ids', name: 'client_subscription_ids'},
+      //{data: 'client_subscription_ids', name: 'client_subscription_ids'},
       {data: 'is_verified', name: 'is_verified', class:"text-center", orderable: false, searchable: false},
       {data: 'modified_by', name: 'modified_by', class:"text-center", orderable: false, searchable: false},
       {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},

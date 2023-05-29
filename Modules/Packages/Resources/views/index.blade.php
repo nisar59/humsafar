@@ -34,8 +34,8 @@ Packages
                 <th>Title</th>
                 <th>Amount</th>
                 <th>Subscription Type</th>
-                <th>Subscription Duration</th>
-                <th>Status</th>
+<!--                 <th>Subscription Duration</th>
+ -->                <th>Status</th>
                 <th>Modified By</th>
                 <th>Action</th>
               </tr>
@@ -62,7 +62,7 @@ columns: [
 {data: 'title', name: 'title'},
 {data: 'amount', name: 'amount'},
 {data: 'subscription_type', name: 'subscription_type'},
-{data: 'subscription_duration', name: 'subscription_duration'},
+//{data: 'subscription_duration', name: 'subscription_duration'},
 {data: 'status', name: 'status', class:'text-center'},
 {data: 'modified_by', name: 'modified_by', class:"text-center", orderable: false, searchable: false},
 {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},
