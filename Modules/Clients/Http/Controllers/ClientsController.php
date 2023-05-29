@@ -200,6 +200,7 @@ class ClientsController extends Controller
             'phone_primary'=>['required', 'max:12', 'unique:clients'],
             'phone_secondary'=>'required',
             'cnic'=>['required', 'max:15', 'unique:clients'],
+            'email'=>['required', 'unique:clients'],
             'monthly_income'=>'required',
             'address'=>'required',
             'medical_expense'=>'required',
@@ -296,7 +297,6 @@ class ClientsController extends Controller
         
         try {
 
-
             $req->validate([
                 'package_id'=>'required',
 
@@ -390,6 +390,7 @@ class ClientsController extends Controller
             'phone_primary'=>['required', 'max:12', 'unique:clients,phone_primary,'.$id],
             'phone_secondary'=>'required',
             'cnic'=>['required', 'max:15', 'unique:clients,cnic,'.$id],
+            'email'=>['required', 'unique:clients,email,'.$id],
             'monthly_income'=>'required',
             'address'=>'required',
             'medical_expense'=>'required',

@@ -74,11 +74,15 @@ Client
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">Phone No Secondary</label>
               <input type="text" class="form-control" value="{{old('phone_secondary')}}" name="phone_secondary" placeholder="Phone No Secondary">
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
+              <label for="">Email</label>
+              <input type="email" class="form-control" value="{{old('email')}}" name="email" placeholder="Email">
+            </div>
+            <div class="col-md-4 form-group">
               <label for="">CNIC</label>
               <input type="text" class="form-control" value="{{old('cnic')}}" name="cnic" placeholder="CNIC">
             </div>

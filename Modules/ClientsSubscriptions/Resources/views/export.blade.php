@@ -1,12 +1,14 @@
 <table>
     <thead>
     <tr>
-      <th>Client Name</th>
-      <th>Client CNIC</th>
+    <th>Client CNIC</th>
+     <th>Client Name</th>
+     <th>Client Email</th>
       <th>Package</th>
       <th>Amount</th>
       <th>Subscription Date</th>
       <th>Expire Date</th>
+      <th>Relation</th>
     </tr>
     </thead>
     <tbody>
@@ -14,12 +16,17 @@
             <tr>
                 <td>
                     @if(ClientDetail($sub->client_id)!=null)
+                       {{ClientDetail($sub->client_id)->cnic}}
+                    @endif
+                </td>                
+                <td>
+                    @if(ClientDetail($sub->client_id)!=null)
                        {{ClientDetail($sub->client_id)->name}}
                     @endif
                 </td>
                 <td>
                     @if(ClientDetail($sub->client_id)!=null)
-                       {{ClientDetail($sub->client_id)->cnic}}
+                       {{ClientDetail($sub->client_id)->email}}
                     @endif
                 </td>
                 <td>
@@ -36,6 +43,7 @@
                 <td>
                     {{Carbon\Carbon::parse($sub->expire_date)->format('d-m-Y');}}
                 </td>
+                <td>Self</td>
             </tr>
         @endforeach
     </tbody>

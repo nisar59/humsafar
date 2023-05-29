@@ -74,6 +74,7 @@ Clients
               <tr>
                 <th>Desk Code</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Parentage</th>
                 <th>DOB</th>
                 <th>Education</th>
@@ -121,6 +122,7 @@ $(document).ready( function(){
         columns: [
             {data: 'desk_id', name: 'desk_id'},
             {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
             {data: 'parentage', name: 'parentage'},
             {data: 'dob', name: 'dob'},
             {data: 'education', name: 'education'},
