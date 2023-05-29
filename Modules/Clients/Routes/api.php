@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix'=>'clients','middleware' => ['jwt.verify']],function(){
     Route::get('/', 'API\ClientsController@index');    
     Route::get('/create/', 'API\ClientsController@create');  
-    Route::post('/verify', 'ClientsController@verify');  
+    Route::post('/verify', 'API\ClientsController@verify');  
     Route::post('/store/', 'API\ClientsController@store');    
     Route::get('/find/{id}', 'API\ClientsController@edit');
     Route::POST('/update/{id}', 'API\ClientsController@update');
