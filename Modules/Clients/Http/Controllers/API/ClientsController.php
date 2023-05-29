@@ -124,7 +124,7 @@ class ClientsController extends Controller
             'gender'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients'],
             'cnic'=>['required', 'max:15', 'unique:clients'],
-            'email'=>['required', 'max:15', 'unique:clients'],
+            'email'=>['required', 'unique:clients'],
             'monthly_income'=>'required',
             'address'=>'required',
             'medical_expense'=>'required',
