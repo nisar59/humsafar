@@ -67,6 +67,35 @@ class ClientsController extends Controller
         }
     }
 
+
+    public function verify(Request $req)
+    {
+        try {
+
+           $otp=Settings()->sms_notifications==1 ? GenerateOTP() : 123 ;
+
+            $msg="Your OTP code for ".Settings()->portal_name." app is ".$otp." For any issues, contact us at ".Settings()->portal_email;
+            $result=SendMessage($req->phone, $msg);
+            if($result->success){
+                $res=['success'=>true,'message'=>"OTP sent Successfully",'errors'=>[],'data'=>null];
+            }
+            else{
+                $res=['success'=>false,'message'=>"Something went wrong while sending OTP with this error :".$result->message,'errors'=>[],'data'=>null];
+            }
+
+
+        $res=['success'=>true,'message'=>'Education and Province Districts List is fetched','errors'=>[],'data'=>$data];
+
+            return response()->json($res);
+
+        } catch (Exception $e) {
+            $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+        } catch (Throwable $e){
+            $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+        }
+    }
+
+
     /**
      * Store a newly created resource in storage.
      * @param Request $request

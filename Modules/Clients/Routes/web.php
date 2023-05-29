@@ -17,6 +17,7 @@ Route::group(['prefix'=>'clients','middleware' => ['permission:clients.view']],f
 
 Route::group(['prefix'=>'clients','middleware' => ['permission:clients.add']],function(){
     Route::get('/create', 'ClientsController@create');
+    Route::get('/verify', 'ClientsController@verify');
     Route::post('/store/', 'ClientsController@store');
 });
 Route::group(['prefix'=>'clients','middleware' => ['permission:clients.edit']],function(){
