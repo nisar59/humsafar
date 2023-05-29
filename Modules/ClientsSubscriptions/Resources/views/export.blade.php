@@ -4,6 +4,7 @@
     <th>Client CNIC</th>
      <th>Client Name</th>
      <th>Client Email</th>
+     <th>Client Phone</th>
       <th>Package</th>
       <th>Amount</th>
       <th>Subscription Date</th>
@@ -29,6 +30,11 @@
                        {{ClientDetail($sub->client_id)->email}}
                     @endif
                 </td>
+                <td>
+                    @if(ClientDetail($sub->client_id)!=null)
+                       {{ClientDetail($sub->client_id)->phone_primary}}
+                    @endif
+                </td>                
                 <td>
                     @if(PackageDetail($sub->package_id)!=null)
                        {{PackageDetail($sub->package_id)->title}}
