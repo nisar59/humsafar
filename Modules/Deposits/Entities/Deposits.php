@@ -17,7 +17,7 @@ class Deposits extends Model
     use HasFactory,SoftDeletes,Loggable;
 
     protected $table='deposits';
-    protected $fillable = ['client_subscription_ids','user_id','desk_id','amount','desposit_date','deposit_slip','deposit_slip_no','bank_id','verified'];
+    protected $fillable = ['client_subscription_ids','user_id','desk_id','amount','desposit_date','deposit_slip','deposit_slip_no','bank_id','is_verified'];
     
     protected $casts = [
         'client_subscription_ids' => 'json'

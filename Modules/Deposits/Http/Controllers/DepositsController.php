@@ -45,8 +45,8 @@ class DepositsController extends Controller
       if ($req->desposit_date != null) {
         $deposits->whereDate('desposit_date', $req->desposit_date);
       }    
-      if ($req->verified != null) {
-        $deposits->where('verified', $req->verified);
+      if ($req->is_verified != null) {
+        $deposits->where('is_verified', $req->is_verified);
       }  
 
         $total = $deposits->count();
@@ -118,8 +118,8 @@ class DepositsController extends Controller
                      return '<img width="50" class="img" src="'.url('img/deposit-slips/'.$row->deposit_slip).'">';
                  })
 
-                ->editColumn('verified', function ($row) {
-                    if($row->verified==1){
+                ->editColumn('is_verified', function ($row) {
+                    if($row->is_verified==1){
                     return  '<a class="btn btn-success btn-sm" data-prompt-msg="" href="javascript:void(0)">verified</a>';
                     }
                     else{
@@ -127,7 +127,7 @@ class DepositsController extends Controller
                     }
                 })
 
-                ->rawColumns(['action', 'deposit_slip','modified_by', 'verified'])
+                ->rawColumns(['action', 'deposit_slip','modified_by', 'is_verified'])
                 ->make(true);
     }
 
@@ -196,7 +196,7 @@ class DepositsController extends Controller
     {
         DB::beginTransaction();
         try {
-            Deposits::find($id)->update(['verified'=>1]);
+            Deposits::find($id)->update(['is_verified'=>1]);
             DB::commit();
             return redirect('deposits')->with('success', 'Deposit successfully marked as verified');
 
@@ -227,7 +227,7 @@ class DepositsController extends Controller
         foreach ($collection[0] as $key => $row) {
             $deposits=Deposits::where('deposit_slip_no', $row['deposit_slip_no']);
             if($deposits->count()>0){
-                $deposits->update(['verified'=>1]);
+                $deposits->update(['is_verified'=>1]);
             }
         }
         DB::commit();

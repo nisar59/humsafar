@@ -39,7 +39,7 @@ Deposits
               </div>
               <div class="col-md-3 form-group">
                 <label for="">Verification</label>
-                <select class="form-control filters" name="verified">
+                <select class="form-control filters" name="is_verified">
                   <option value="">Select</option>
                   <option value="0">Pending</option>
                   <option value="1">Verified</option>
@@ -113,7 +113,7 @@ $(document).ready( function(){
       {data: 'desposit_date', name: 'desposit_date'},
       {data: 'deposit_slip', name: 'deposit_slip', class:"text-center"},
       {data: 'client_subscription_ids', name: 'client_subscription_ids'},
-      {data: 'verified', name: 'verified', class:"text-center", orderable: false, searchable: false},
+      {data: 'is_verified', name: 'is_verified', class:"text-center", orderable: false, searchable: false},
       {data: 'modified_by', name: 'modified_by', class:"text-center", orderable: false, searchable: false},
       {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},
     ],
