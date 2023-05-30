@@ -42,7 +42,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('clients')
+                @can('clients.view')
                 <li class="menu-title">Clients List</li>
                 <li>
                     <a href="{{url('clients')}}" class="waves-effect">
@@ -51,7 +51,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('clients-subscriptions')
+                @can('clients-subscriptions.view')
                 <li class="menu-title">Subscriptions & Services</li>
                 <li>
                     <a href="{{url('clients-subscriptions')}}" class="waves-effect">
@@ -60,7 +60,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('deposits')
+                @can('deposits.view')
                 <li class="menu-title">Deposits</li>
                 <li>
                     <a href="{{url('deposits')}}" class="waves-effect">
@@ -69,7 +69,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('feedback')
+                @can('feedback.view')
                 <li class="menu-title">Feedback</li>
                 <li>
                     <a href="{{url('feedback')}}" class="waves-effect">
@@ -78,7 +78,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('packages')
+                @can('packages.view')
                 <li class="menu-title">Packages</li>
                 <li>
                     <a href="{{url('packages')}}" class="waves-effect">
@@ -87,7 +87,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('banks')
+                @can('banks.view')
                 <li class="menu-title">Banks</li>
                 <li>
                     <a href="{{url('banks')}}" class="waves-effect">
@@ -110,7 +110,7 @@ $type = Request()->type;
                     </ul>
                 </li>
                 @endcan
-                @can('feedback-questions')
+                @can('feedback-questions.view')
                 <li class="menu-title">Feedback Questions</li>
                 <li>
                     <a href="{{url('feedback-questions')}}" class="waves-effect">
@@ -119,7 +119,7 @@ $type = Request()->type;
                     </a>
                 </li>
                 @endcan
-                @can('settings')
+                @can('settings.view')
                 <li class="menu-title">Penal Settings</li>
                 <li>
                     <a href="{{url('settings')}}" class="waves-effect">
