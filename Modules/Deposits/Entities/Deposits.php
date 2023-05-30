@@ -23,6 +23,7 @@ class Deposits extends Model
         'client_subscription_ids' => 'json'
     ];
 
+    protected $appends = ['slip'];
 
     protected static function newFactory()
     {
@@ -64,5 +65,9 @@ class Deposits extends Model
         return $this->hasOne(Bank::class, 'id', 'bank_id')->select('id','name','account_title','account_no','status');
     }
 
+    public function getSlipAttribute()
+    {
+        return url('public/img/deposit-slips/').'/'.$this->deposit_slip;
+    }
 
 }
