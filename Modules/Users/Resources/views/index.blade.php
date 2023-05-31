@@ -82,7 +82,10 @@ Users
                 <th>Role Name</th>
                 <th>Status</th>
                 <th>Branch</th>
-                <th>Access Level</th>
+                <th>Bank</th>
+                <th>Account Title</th>
+                <th>Account No</th>
+                <th>Date</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -119,7 +122,10 @@ $(document).ready( function(){
             {data: 'role_name', name: 'role_name'},
             {data: 'status', name: 'status', class:'text-center'},
             {data: 'branch_id', name: 'branch_id'},
-            {data: 'access_level', name: 'access_level',class:'text-center'},
+            {data: 'bank_name', name: 'bank_name',class:'text-center'},
+            {data: 'bank_account_title', name: 'bank_account_title',class:'text-center'},
+            {data: 'bank_account_no', name: 'bank_account_no',class:'text-center'},
+            {data: 'created_at', name: 'created_at',class:'text-center'},
             {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},
       ]
   });

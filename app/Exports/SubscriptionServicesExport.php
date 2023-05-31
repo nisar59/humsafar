@@ -49,7 +49,7 @@ class SubscriptionServicesExport implements FromView
         $clientssub->where('services', $req->services);
       }
 
-        $clientssub   = $clientssub->get();
+        $clientssub= $clientssub->get();
 
 
         return view('clientssubscriptions::export', [

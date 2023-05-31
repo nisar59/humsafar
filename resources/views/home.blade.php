@@ -192,12 +192,14 @@ Dashboard
             </thead>
             <tbody>
               @foreach($users as $user)
+              @if($user->desk()->exists())
               <tr>
                 <td>{{$user->name}}</td>
                 <td>{{$user->phone}}</td>
                 <td>{!! $user->branch!=null ? $user->branch->name : '<a href="'.url('users/edit/'.$user->id).'" class="text-danger">Not found</a>' !!}</td>
                 <td>{{$user->cash_in_hand()->exists() ? number_format($user->cash_in_hand->sum('amount')) : ''; }}</td>
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

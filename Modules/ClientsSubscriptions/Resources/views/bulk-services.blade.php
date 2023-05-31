@@ -14,6 +14,7 @@
           <div class="col-12">
             <label>Select a file</label>
             <input type="file" class="form-control" name="file">
+            <a href="{{url('export-sample/subscriptions-sample')}}">Export Sample</a>
           </div>
         </div>
 

@@ -86,6 +86,20 @@ Users
                 </select>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label>Bank Account Name</label>
+              <input type="text" class="form-control" name="bank_name" placeholder="Bank Account Name">
+            </div>
+            <div class="col-md-4 form-group">
+              <label>Bank Account Title</label>
+              <input type="text" class="form-control" name="bank_account_title" placeholder="Bank Account Title">
+            </div>
+            <div class="col-md-4 form-group">
+              <label>Bank Account No</label>
+              <input type="text" class="form-control" name="bank_account_no" placeholder="Bank Account No">
+            </div>
+          </div>
         </div>
         <div class="card-footer text-end">
           <button class="btn btn-primary mr-1" type="submit">Submit</button>

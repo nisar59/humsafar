@@ -225,7 +225,7 @@ class DepositsController extends Controller
         $collection = Excel::toArray(new DepositsVerificationImport, $req->file('file'));
   
         foreach ($collection[0] as $key => $row) {
-            $deposits=Deposits::where('deposit_slip_no', $row['deposit_slip_no']);
+            $deposits=Deposits::where(['deposit_slip_no'=>$row['deposit_slip_no'], 'amount'=>$row['amount']]);
             if($deposits->count()>0){
                 $deposits->update(['is_verified'=>1]);
             }

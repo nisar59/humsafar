@@ -1,0 +1,10 @@
+<table>
+    <thead>
+    <tr>
+    <th>deposit_slip_no</th>
+    <th>amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+<table>
+    <thead>
+    <tr>
+    <th>cnic</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

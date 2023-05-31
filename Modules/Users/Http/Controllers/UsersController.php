@@ -126,7 +126,9 @@ class UsersController extends Controller
                 ->editColumn('branch_id', function ($row) {
                     return BranchDetail($row->branch_id)!=null ? BranchDetail($row->branch_id)->name: '';
                 })
-
+                ->editColumn('created_at', function ($row) {
+                    return $row->created_at->format('d-m-Y');
+                })
                 ->editColumn('access_level', function ($row) {
                     return $row->access_level;
                 })

@@ -230,15 +230,39 @@ class ClientsSubscriptionsController extends Controller
              
         $collection = Excel::toArray(new SubScriptionServices, $req->file('file'));
 
+        $faulty=[];
         
         foreach ($collection[0] as $key => $row) {
            $client=Client::where('cnic', $row['cnic'])->first();
+
            if($client!=null && $client->clientsubscriptions()->exists()){
                 $client->clientsubscriptions()->update(['services'=>1]);
+
+                /*/////////////////////Send SMS Notification///////////////////////////*/
+
+                $msg="Your Services of ".Settings()->portal_name." have been successfully Actived.";
+                $msg_res=SendMessage($client->phone_primary, $msg);
+                if($msg_res->success){
+                    $msg_res="And SMS Notification sent";
+                }else{
+                    $client->clientsubscriptions()->update(['services'=>0]);
+                    $faulty[]=$row['cnic'];
+                }
+
+                /*/////////////////////////End SMS Notification////////////////////////*/
+           }else{
+            $faulty[]=$row['cnic'];
            }
+
+
         }
-        DB::commit();
-        return redirect()->back()->with('success', 'Services successfully Actived');
+            DB::commit();
+            if(count($faulty)>0){
+            return redirect()->back()->with('warning', 'Services successfully Actived except '.implode(',', $faulty).' CNICs');
+            }else{
+            return redirect()->back()->with('success', 'Services successfully Actived & SMS Notification sent');
+            }
+
          }catch(Throwable $e){
             DB::rollback();
             return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
@@ -259,9 +283,29 @@ class ClientsSubscriptionsController extends Controller
     {
         DB::beginTransaction();
         try {
-            ClientSubscriptions::find($id)->update(['services'=>1]);
+            $sub=ClientSubscriptions::find($id);
+            $client=ClientDetail($sub->client_id);
+            if($client==null){
             DB::commit();
-            return redirect('clients-subscriptions')->with('success', 'Services successfully Actived');
+            return redirect('clients-subscriptions')->with('error', 'Client not found against this subscriptions');
+            }
+            $sub->update(['services'=>1]);
+            DB::commit();
+
+            /*/////////////////////Send SMS Notification///////////////////////////*/
+
+            $msg="Your Services of ".Settings()->portal_name." have been successfully Actived.";
+            $msg_res=SendMessage($client->phone_primary, $msg);
+            if($msg_res->success){
+                $msg_res="And SMS Notification sent";
+            }else{
+                $msg_res="And SMS Notification Not sent because ".$msg_res->message;
+            }
+
+            /*/////////////////////////End SMS Notification////////////////////////*/
+
+
+            return redirect('clients-subscriptions')->with('success', 'Services successfully Actived '.$msg_res);
 
         } catch (Exception $e) {
             DB::rollback();

@@ -9,6 +9,8 @@ use App\Models\ClientSubscriptions;
 use Modules\Deposits\Entities\Deposits;
 use Modules\Feedback\Entities\Feedback;
 use Modules\Packages\Entities\Packages;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\GlobalSamplesExport;
 use Carbon\Carbon;
 use Artisan;
 use Auth;
@@ -304,6 +306,21 @@ $users=User::with('cash_in_hand')->get();
             return redirect('login');
         } catch(Throwable $e){
             return redirect('login');
+        }
+
+    }
+
+
+    public function sample($sample)
+    {
+        try {
+         return Excel::download(new GlobalSamplesExport($sample), $sample.'.xlsx');
+
+        //return redirect()->back()->with('success', 'Subscription & Services successfully downloaded');
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }catch(Throwable $e){
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
         }
 
     }
