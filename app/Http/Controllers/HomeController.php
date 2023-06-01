@@ -74,7 +74,7 @@ class HomeController extends Controller
 
         $deposits_amounts=Deposits::selectRaw('DATE_FORMAT(desposit_date, "%Y-%m") as month, SUM(amount) as amount')->groupBy('month')->whereYear('desposit_date', now()->format('Y'))->get();
 
-        $subscriptions_amount=ClientSubscriptions::selectRaw('DATE_FORMAT(subscription_date, "%Y-%m") as month, SUM(amount) as amount')->groupBy('month')->whereYear('subscription_date', now()->format('Y'))->get();
+        $subscriptions_amount=ClientSubscriptions::selectRaw('DATE_FORMAT(subscription_date, "%Y-%m") as month, SUM(amount) as amount')->groupBy('month')->where('deposit_id',null)->whereYear('subscription_date', now()->format('Y'))->get();
 
         $barchart['labels']=[];
         $barchart['datasets'][0]['type']='bar';
