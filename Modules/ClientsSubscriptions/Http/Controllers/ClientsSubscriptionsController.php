@@ -240,7 +240,7 @@ class ClientsSubscriptionsController extends Controller
 
                 /*/////////////////////Send SMS Notification///////////////////////////*/
 
-                $msg="Your Services of ".Settings()->portal_name." have been successfully Actived. Your username is :".$row['username']." and password is :".$row['password'];
+                $msg="Sehat Kahani Services are Actived. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
                 $msg_res=SendMessage($client->phone_primary, $msg);
                 if($msg_res->success){
                     $msg_res="And SMS Notification sent";
