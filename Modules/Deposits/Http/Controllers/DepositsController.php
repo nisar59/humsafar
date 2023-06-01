@@ -223,15 +223,23 @@ class DepositsController extends Controller
          try {
              
         $collection = Excel::toArray(new DepositsVerificationImport, $req->file('file'));
-  
+        $faulty=[];
         foreach ($collection[0] as $key => $row) {
             $deposits=Deposits::where(['deposit_slip_no'=>$row['deposit_slip_no'], 'amount'=>$row['amount']]);
             if($deposits->count()>0){
                 $deposits->update(['is_verified'=>1]);
             }
+            else{
+                $faulty[]=$row['deposit_slip_no'];
+            }
         }
         DB::commit();
+
+        if(count($faulty)>0){
+        return redirect()->back()->with('warning', 'Deposits successfully marked as verified except :'.implode(',', $faulty).' Deposit slips');
+        }
         return redirect()->back()->with('success', 'Deposits successfully marked as verified');
+
          }catch(Throwable $e){
             DB::rollback();
             return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
