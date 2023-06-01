@@ -131,7 +131,7 @@ class ClientsSubscriptionsController extends Controller
                     return  '<a class="btn btn-success btn-sm" data-prompt-msg="" href="javascript:void(0)">Actived</a>';
                     }
                     else{
-                    return  '<a class="btn btn-danger btn-sm verify-prompt" data-prompt-msg="Are you sure you want to Active this Service" href="'.url('clients-subscriptions/services/'.$row->id).'">Pending</a>';
+                    return  '<a class="btn btn-danger btn-sm " data-prompt-msg="Are you sure you want to Active this Service" data-href="'.url('clients-subscriptions/services/'.$row->id).'">Pending</a>';
                     }
                 })
                 ->editColumn('deposit_id', function ($row) {
@@ -235,12 +235,12 @@ class ClientsSubscriptionsController extends Controller
         foreach ($collection[0] as $key => $row) {
            $client=Client::where('cnic', $row['cnic'])->first();
 
-           if($client!=null && $client->clientsubscriptions()->exists()){
+           if($client!=null && $client->clientsubscriptions()->exists() && isset($row['username']) && $row['password']){
                 $client->clientsubscriptions()->update(['services'=>1]);
 
                 /*/////////////////////Send SMS Notification///////////////////////////*/
 
-                $msg="Your Services of ".Settings()->portal_name." have been successfully Actived.";
+                $msg="Your Services of ".Settings()->portal_name." have been successfully Actived. Your username is :".$row['username']." and password is :".$row['password'];
                 $msg_res=SendMessage($client->phone_primary, $msg);
                 if($msg_res->success){
                     $msg_res="And SMS Notification sent";

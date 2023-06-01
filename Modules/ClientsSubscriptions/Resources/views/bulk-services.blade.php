@@ -11,10 +11,13 @@
         @csrf
       <div class="modal-body">
         <div class="row">
-          <div class="col-12">
+          <div class="col-11">
             <label>Select a file</label>
-            <input type="file" class="form-control" name="file">
-            <a href="{{url('export-sample/subscriptions-sample')}}">Export Sample</a>
+            <input type="file" class="form-control mb-2" name="file">
+          </div>
+          <div class="col-1">
+            <label class="label">Sample</label>            
+            <a class="btn btn-success" href="{{url('export-sample/subscriptions-sample')}}"><i class="fa fa-download"></i></a>
           </div>
         </div>
 

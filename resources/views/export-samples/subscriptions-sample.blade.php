@@ -2,6 +2,8 @@
     <thead>
     <tr>
     <th>cnic</th>
+    <th>username</th>
+    <th>password</th>
     </tr>
     </thead>
     <tbody>
