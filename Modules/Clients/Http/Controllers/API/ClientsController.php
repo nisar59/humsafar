@@ -174,6 +174,8 @@ class ClientsController extends Controller
                    $expire_date= $sub_date->addYear($total_sub_duration);
                 }
 
+                $expire_date=$expire_date->addDay(3);
+
               $sub= ClientSubscriptions::create([
                     'desk_id'=>Auth::user()->desk->id,
                     'client_id'=>$client->id,
@@ -424,6 +426,8 @@ class ClientsController extends Controller
                 if($sub_type['type']=='year'){
                    $expire_date= $sub_date->addYear($total_sub_duration);
                 }
+
+                $expire_date=$expire_date->addDay(3);
 
                $sub=ClientSubscriptions::create([
                     'desk_id'=>$user->desk->id,
