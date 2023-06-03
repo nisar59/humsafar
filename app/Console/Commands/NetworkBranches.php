@@ -49,10 +49,16 @@ class NetworkBranches extends Command
                        ]);
                     }
                 }
+                GenerateSystemLog(['model'=>'branches','message'=>now().' Branches successfully sync to MIS']);
+                $this->line('Branches successfully sync to MIS');
+
+            }
+            else{
+                GenerateSystemLog(['model'=>'branches','message'=>now().' Branches not sync to MIS']);
+                $this->line('Branches not sync to MIS');
+
             }
             DB::commit();
-            GenerateSystemLog(['model'=>'branches','message'=>now().' Branches successfully sync to MIS']);
-            $this->line('Branches successfully sync to MIS');
 
         } catch (Exception $e) {
             DB::rollback();

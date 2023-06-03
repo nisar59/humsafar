@@ -47,10 +47,16 @@ class NetworkRegions extends Command
                        ]);
                     }
                 }
+            
+                GenerateSystemLog(['model'=>'regions','message'=>now().' Regions successfully sync to MIS']);
+                $this->line('Regions successfully sync to MIS');
+
+            }else{
+            GenerateSystemLog(['model'=>'regions','message'=>now().' Regions not sync to MIS']);
+            $this->line('Regions not sync to MIS');
+
             }
             DB::commit();
-            GenerateSystemLog(['model'=>'regions','message'=>now().' Regions successfully sync to MIS']);
-            $this->line('Regions successfully sync to MIS');
         } catch (Exception $e) {
             DB::rollback();
 

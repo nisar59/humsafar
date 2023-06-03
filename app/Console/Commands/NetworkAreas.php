@@ -48,10 +48,16 @@ class NetworkAreas extends Command
                        ]);
                     }
                 }
+
+                GenerateSystemLog(['model'=>'areas','message'=>now().' Areas successfully sync to MIS']);
+                $this->line('Areas successfully sync to MIS');
+            }
+            else{
+            GenerateSystemLog(['model'=>'areas','message'=>now().' Areas not sync to MIS']);
+            $this->line('Areas not sync to MIS');
+
             }
             DB::commit();
-            GenerateSystemLog(['model'=>'areas','message'=>now().' Areas successfully sync to MIS']);
-            $this->line('Areas successfully sync to MIS');
         } catch (Exception $e) {
             DB::rollback();
             GenerateSystemLog(['model'=>'areas','message'=>now().' Something went wrong while areas sync to MIS with this error: '.$e->getMessage()]);
