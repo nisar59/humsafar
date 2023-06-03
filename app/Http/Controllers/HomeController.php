@@ -37,11 +37,11 @@ class HomeController extends Controller
     {        $row['username']='test';
             $row['password']='password';
                     $msg="Sehat Kahani Services are Activated. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
-                    $msg_res=SendMessage('03025869931', $msg);
+                    $msg_res=SendMessage('03224272106', $msg);
 
                     dd($msg_res);
 
-                    
+
         User::find(Auth::id())->update([
             'lock_screen_token'=>Hash::make(Auth::id().now()),
         ]);
