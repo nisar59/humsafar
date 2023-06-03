@@ -28,7 +28,7 @@ Desk Users
 						<div class="form-group col-md-12">
 							<label>Select file</label>
 							<input type="file" class="form-control" name="file">
-							<a href="{{url('users/sample-export')}}">Export sample</a>
+							<a href="{{url('export-sample?file_name=users-sample')}}">Export sample</a>
 						</div>
 					</div>
 				</div>

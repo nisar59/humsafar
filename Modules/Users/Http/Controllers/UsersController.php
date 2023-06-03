@@ -13,7 +13,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\UsersSampleExport;
+use App\Exports\GlobalSamplesExport;
 use App\Imports\UsersImport;
 use Auth;
 use Throwable;
@@ -157,11 +157,6 @@ class UsersController extends Controller
         return view('users::import');
     }
 
-    public function exportsample()
-    {
-         return Excel::download(new UsersSampleExport, 'users-sample.xlsx');
-    }
-
 
     public function importstore(Request $req)
     {
@@ -172,21 +167,51 @@ class UsersController extends Controller
         $error_index=0;
         DB::beginTransaction();
         try {
-            $existing_users=[];
+            $faulty=[];
             $collection = Excel::toArray(new UsersImport, $req->file('file'));
+
             foreach($collection[0] as $key => $row){
                 $error_index=$key+1;
 
                 if(User::where('cnic',$row['cnic'])->orWhere('phone',$row['phone'])->orWhere('emp_code',$row['emp_code'])->count()<1){
-                User::updateOrCreate(['cnic'=>$row['cnic'], 'phone'=>$row['phone'], 'emp_code'=>$row['emp_code']],$row);
+
+                    $branch=BranchDetail($row['branch_id']);
+                    if($branch!=null){
+                        $row['area_id']=$branch->area_id;
+                        $row['region_id']=$branch->region_id;
+                        User::updateOrCreate(['cnic'=>$row['cnic'], 'phone'=>$row['phone'], 'emp_code'=>$row['emp_code']],$row);
+
+                    }else{
+                    $faulty[]=$row;
+                    }
+
                 }
                 else{
-                    $existing_users[]=$row['cnic']."\n";
+                    $faulty[]=$row;
                 }
 
             }
             DB::commit();
-            return redirect('users')->with('success', 'Users successfully imported except: '.implode(',', $existing_users));
+
+        if(count($faulty)>0){
+            $req['file_name']='users-sample';
+            $req['data']=$faulty;
+
+            $name='Not-imported-users-'.strtotime(now()).'.xlsx';
+
+            Excel::store(new GlobalSamplesExport($req), $name, 'exports');
+            
+           $log= GenerateImportExportLogs([
+                'file_name'=>$name,
+                'success'=>count($collection[0])- count($faulty),
+                'failed'=>count($faulty)
+            ]);
+
+
+            return redirect('import-export-logs/show/'.$log->id)->with('warning', 'File Uploaded successfully and Imported : '.count($collection[0])- count($faulty). " Not Imported : ".count($faulty));
+        }
+
+        return redirect('users')->with('success', 'All users successfully imported');
 
         } catch (Exception $e) {
             DB::rollback();

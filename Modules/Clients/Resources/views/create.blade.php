@@ -25,7 +25,7 @@ Client
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-4">
               <label for="">Desks</label>
               <select name="desk_id" class="form-control select2">
                 @foreach($desks as $desk)
@@ -33,23 +33,21 @@ Client
                 @endforeach
               </select>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
+
+            <div class="col-md-4 form-group">
               <label for="">Client Name</label>
               <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Client Name">
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">Client Parentage</label>
               <input type="text" class="form-control" name="parentage" value="{{old('parentage')}}" placeholder="Client Parentage">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
+
+            <div class="col-md-4 form-group">
               <label for="">Date of Birth</label>
               <input type="date" class="form-control" name="dob" value="{{old('dob')}}" placeholder="Date of Birth">
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">Education</label>
               <select name="education" class="form-control">
                 <option value="">select</option>
@@ -58,22 +56,28 @@ Client
                 @endforeach
               </select>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
+
+            <div class="col-md-4 form-group">
               <label for="">Gender</label>
-              <select name="gender" name="gender" class="form-control select2">
+              <select name="gender" class="form-control select2">
                 <option value="male" @if(old('gender')=="male") selected @endif>Male</option>
                 <option value="female" @if(old('gender')=="female") selected @endif>Female</option>
                 <option value="other" @if(old('gender')=="other") selected @endif>Other</option>
               </select>
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
+              <label for="">Marital Status</label>
+              <select name="marital_status" class="form-control select2">
+                <option value="1" @if(old('marital_status')==1) selected @endif>Married</option>
+                <option value="0" @if(old('marital_status')==0) selected @endif>Unmarried</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 form-group">
               <label for="">Phone No Primary</label>
               <input type="text" class="form-control" value="{{old('phone_primary')}}" name="phone_primary" placeholder="Phone No Primary">
             </div>
-          </div>
-          <div class="row">
+
             <div class="col-md-4 form-group">
               <label for="">Phone No Secondary</label>
               <input type="text" class="form-control" value="{{old('phone_secondary')}}" name="phone_secondary" placeholder="Phone No Secondary">
@@ -86,23 +90,21 @@ Client
               <label for="">CNIC</label>
               <input type="text" class="form-control" value="{{old('cnic')}}" name="cnic" placeholder="CNIC">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
+
+            <div class="col-md-4 form-group">
               <label for="">Monthly Income</label>
               <input type="text" class="form-control" value="{{old('monthly_income')}}" name="monthly_income" placeholder="Monthly Income">
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">Medical Expense</label>
               <input type="text" class="form-control" value="{{old('medical_expense')}}" name="medical_expense" placeholder="Medical Expense">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
+
+            <div class="col-md-4 form-group">
               <label for="">Address</label>
               <input type="text" class="form-control" value="{{old('address')}}" name="address" placeholder="Address">
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">Province</label>
               <select name="province" id="province" data-json="{{ProvincesDistricts();}}" class="form-control select2">
                 <option value="">select</option>
@@ -111,13 +113,13 @@ Client
                 @endforeach
               </select>
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               <label for="">District</label>
               <select name="district" id="district" class="form-control select2">
                 <option value="">select</option>
               </select>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="">Packages</label>
               <select name="package_id" class="form-control select2">
                 <option value="">Select Package</option>

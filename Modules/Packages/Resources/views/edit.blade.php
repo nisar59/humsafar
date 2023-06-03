@@ -25,15 +25,19 @@ Packages
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <label>Title</label>
               <input type="text" class="form-control  @error('title') is-invalid @enderror" value="{{$data['package']->title}}" name="title" placeholder="Title">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <label>Amount</label>
               <input type="text" class="form-control @error('amount') is-invalid @enderror" value="{{$data['package']->amount}}" name="amount" placeholder="Amount">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
+              <label>Compensation</label>
+              <input type="number" class="form-control @error('compensation') is-invalid @enderror" name="compensation" value="{{$data['package']->compensation}}" placeholder="Compensation">
+            </div>             
+            <div class="form-group col-md-6">
               <label>Subscription Type</label>
               <select class="form-control @error('subscription_type') is-invalid @enderror" name="subscription_type">
                 <option value="">Select Subscription Type</option>

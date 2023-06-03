@@ -1,0 +1,32 @@
+<table>
+    <thead>
+    <tr>
+    <th>name</th>
+    <th>father_name</th>
+    <th>cnic</th>
+    <th>phone</th>
+    <th>email</th>
+    <th>emp_code</th>
+    <th>role_name</th>
+    <th>access_level</th>
+    <th>branch_id</th>
+    </tr>
+    </thead>
+    <tbody>
+        @if($data!=null)
+        @foreach($data as $vl)
+        <tr>
+            <td>{{$vl['name']}}</td>
+            <td>{{$vl['father_name']}}</td>
+            <td>{{$vl['cnic']}}</td>
+            <td>{{$vl['phone']}}</td>
+            <td>{{$vl['email']}}</td>
+            <td>{{$vl['emp_code']}}</td>
+            <td>{{$vl['role_name']}}</td>
+            <td>{{$vl['access_level']}}</td>
+            <td>{{$vl['branch_id']}}</td>
+        </tr>
+        @endforeach
+        @endif
+    </tbody>
+</table>

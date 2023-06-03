@@ -10,6 +10,7 @@ use Modules\Packages\Entities\Packages;
 use App\Models\ClientSubscriptions;
 use Modules\Logs\Entities\Logs;
 use Modules\Logs\Entities\SystemLogs;
+use Modules\Logs\Entities\ImportExportLogs;
 use Illuminate\Support\Facades\Http;
 function AllPermissions()
 {
@@ -325,7 +326,11 @@ function GenerateSystemLog($info)
 	}
 }
 
-
+function GenerateImportExportLogs($info)
+{
+	$log=ImportExportLogs::create($info);
+	return $log;
+}
 
 function TrashModules()
 {

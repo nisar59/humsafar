@@ -17,14 +17,14 @@
           </div>
           <div class="col-1">        
             <label>Sample</label>    
-            <a class="btn btn-success" href="{{url('export-sample/deposit-verify-sample')}}"><i class="fa fa-download"></i></a>
+            <a class="btn btn-success" href="{{url('export-sample?file_name=deposit-verify-sample')}}"><i class="fa fa-download"></i></a>
           </div>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
       </div>
     </form>
     </div>

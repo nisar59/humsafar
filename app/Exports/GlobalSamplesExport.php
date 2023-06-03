@@ -9,11 +9,14 @@ class GlobalSamplesExport implements FromView
 {
 
     private $sample=null;
+    private $data=null;
 
 
-    function __construct($sample)
+    function __construct($req)
     {
-        $this->sample = $sample;
+        $this->sample = $req->file_name;
+        $this->data = $req->data;
+
     }
 
     /**
@@ -21,6 +24,8 @@ class GlobalSamplesExport implements FromView
     */
     public function view():View
     {
-        return view('export-samples.'.$this->sample);    
+        return view('export-samples.'.$this->sample, [
+            'data'=>$this->data
+        ]);    
     }
 }

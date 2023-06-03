@@ -19,7 +19,6 @@ Route::group(['prefix'=>'users','middleware' => ['permission:users.add']],functi
 	Route::get('/create', 'UsersController@create');
 	Route::POST('/store', 'UsersController@store');
 	Route::get('/import', 'UsersController@import');
-	Route::get('/sample-export', 'UsersController@exportsample');
 	Route::POST('/import-store', 'UsersController@importstore');
 
 });

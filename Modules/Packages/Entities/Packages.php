@@ -12,7 +12,7 @@ class Packages extends Model
 {
     use HasFactory,SoftDeletes,Loggable;
     
-    protected $fillable = ['title','amount','subscription_type','subscription_duration','status'];
+    protected $fillable = ['title','amount','compensation','subscription_type','subscription_duration','status'];
 
     protected static function newFactory()
     {

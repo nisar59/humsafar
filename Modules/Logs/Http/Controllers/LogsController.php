@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Logs\Entities\Logs;
 use Modules\Logs\Entities\SystemLogs;
+use Modules\Logs\Entities\ImportExportLogs;
 use Throwable;
 use DataTables;
 use Auth;
+use File;
 use DB;
 class LogsController extends Controller
 {
@@ -62,7 +64,6 @@ class LogsController extends Controller
 
 
 
-
     public function systemlogs()
     {
 
@@ -97,6 +98,48 @@ class LogsController extends Controller
         return view('logs::index');
     }
 
+
+
+    public function importexportlogs()
+    {
+
+        if (request()->ajax()) {
+            $logs=ImportExportLogs::orderBy('created_at')->get();
+                return DataTables::of($logs)
+                    ->addColumn('action', function ($row) {
+                        $action='';
+                    if(Auth::user()->can('logs.view')){
+                    $action.='<a class="btn btn-success m-1 btn-sm" href="'.url('import-export-logs/show/'.$row->id).'"><i class="fas fa-eye"></i></a>';
+                        }
+
+                    if(Auth::user()->can('logs.delete')){
+                    $action.='<a class="btn btn-danger m-1 btn-sm" href="'.url('import-export-logs/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+                        }
+                    
+                    return $action;
+                    })
+
+                    ->editColumn('file_name', function ($row) {
+                        return '<a href="'.url('public/exports/'.$row->file_name).'" download>'.$row->file_name.'</a>';
+                    })
+
+                    ->editColumn('success', function ($row) {
+                        return $row->success;
+                    })
+                    ->editColumn('failed', function ($row) {
+                        return $row->failed;
+                    })                    
+                    ->editColumn('created_at', function ($row) {
+                        return $row->created_at->format('d-m-Y');
+                    })
+                    ->rawColumns(['file_name','action'])
+                    ->make(true);
+        }
+
+
+
+        return view('logs::index');
+    }
 
 
 
@@ -141,6 +184,23 @@ class LogsController extends Controller
         }
 
     }
+
+
+    public function importexportlogsshow($id)
+    {
+        try {
+            $log=ImportExportLogs::find($id);
+            return view('logs::import-export')->withLog($log);
+
+        } catch (Exception $e) {
+                return redirect('/')->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+        catch(Throwable $e){
+                return redirect('/')->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -227,11 +287,70 @@ class LogsController extends Controller
 
 
 
+
     public function systemlogstruncate()
     {
         
         try {
             SystemLogs::truncate();
+            return redirect('logs')->with('success','System Logs Table successfully truncated');
+        } catch (Exception $e) {
+                return redirect()->back()->withInput()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+        catch(Throwable $e){
+                return redirect()->back()->withInput()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+    
+    }
+
+
+    public function importexportlogsdestroy($id)
+    {
+        DB::beginTransaction();
+            
+        try {
+            $iel=ImportExportLogs::findOrFail($id);
+
+            if($iel!=null){
+                $file=public_path('exports/'.$iel->file_name);
+                if($iel->delete() && File::delete($file)){
+                    DB::commit();
+                    return redirect('logs')->with('success','Import Export Log successfully deleted');
+
+                }else{
+                    DB::commit();
+                    return redirect('logs')->with('error','Import Export Log not deleted');
+                }
+            }else{
+                    DB::commit();
+                    return redirect('logs')->with('error','Import Export Log not deleted');
+
+            }
+            DB::commit();
+            return redirect('logs')->with('success','Import Export Log successfully deleted');
+        } catch (Exception $e) {
+                DB::rollback();
+                return redirect()->back()->withInput()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+        catch(Throwable $e){
+                DB::rollback();
+                return redirect()->back()->withInput()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+    
+    }
+
+
+    public function importexportlogstruncate()
+    {
+        
+        try {
+            $path=public_path('exports');
+            if(ImportExportLogs::truncate() &&  File::cleanDirectory($path)){
+            return redirect('logs')->with('success','Import Export Logs Table successfully truncated');
+            }else{
+            return redirect('logs')->with('error','Import Export Logs Table not truncated, please try again');
+            }
+            
             return redirect('logs')->with('success','System Logs Table successfully truncated');
         } catch (Exception $e) {
                 return redirect()->back()->withInput()->with('error', 'Something went wrong with this error: '.$e->getMessage());

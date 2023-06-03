@@ -26,3 +26,7 @@ Route::get('refresh/{id}', 'API\AuthController@refresh');
 Route::group(['prefix'=>'dashboard','middleware' => ['jwt.verify']],function(){
     Route::get('/', 'API\DashboardController@index');    
 });
+
+Route::group(['prefix'=>'users','middleware' => ['jwt.verify']],function(){
+    Route::post('/bank-account-verified', 'API\DashboardController@index');    
+});

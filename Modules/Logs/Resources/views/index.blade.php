@@ -30,6 +30,11 @@ Logs
               <h4>System Logs</h4>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#import-export-logs" role="tab">
+              <h4>Import Export Logs</h4>
+            </a>
+          </li>          
         </ul>
       </div>
       <div class="card-body p-0">
@@ -70,6 +75,24 @@ Logs
               </table>
             </div>
           </div>
+          <div class="tab-pane p-3" id="import-export-logs" role="tabpanel">
+            <a href="{{url('import-export-logs/truncate')}}" class="btn btn-danger" style="position: absolute;right: 8px;top: 8px;"><i class="fas fa-trash-alt"></i></a>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover table-bordered" id="import-export-logs-table" style="width:100%;">
+                <thead class="text-center bg-primary text-white">
+                  <tr>
+                    <th>File Name</th>
+                    <th>Success</th>
+                    <th>Failed</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>          
         </div>
       </div>
     </div>
@@ -105,6 +128,21 @@ buttons:[],
 columns: [
 {data: 'model', name: 'model', class:'text-center', orderable:false},
 {data: 'message', name: 'message', class:'text-center', orderable:false},
+{data: 'created_at', name: 'created_at', class:'text-center', orderable:false},
+{data: 'action', name: 'action', orderable: false, class:"text-center", searchable: false},
+]
+});
+
+
+var regions_table = $('#import-export-logs-table').DataTable({
+processing: true,
+serverSide: true,
+ajax: "{{url('import-export-logs')}}",
+buttons:[],
+columns: [
+{data: 'file_name', name: 'file_name', class:'text-center', orderable:false},
+{data: 'success', name: 'success', class:'text-center', orderable:false},
+{data: 'failed', name: 'failed', class:'text-center', orderable:false},
 {data: 'created_at', name: 'created_at', class:'text-center', orderable:false},
 {data: 'action', name: 'action', orderable: false, class:"text-center", searchable: false},
 ]

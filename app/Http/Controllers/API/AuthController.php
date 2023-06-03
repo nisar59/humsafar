@@ -184,7 +184,7 @@ class AuthController extends Controller
                 $res=['success'=>false,'message'=>'Authentication Failed, Desk is closed or User transfered','errors'=>[],'data'=>null];
             }
             else{
-                $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id');
+                $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
 
                 $user['access_token']=$token;
                 $user['desk']=Auth::user()->desk->only('id','desk_code','status');
@@ -252,7 +252,7 @@ class AuthController extends Controller
                 $res=['success'=>false,'message'=>'Authentication Failed, Desk is closed or User transfered','errors'=>[],'data'=>null];
             }
             else{
-                $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id');
+                $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
                 $user['access_token']=$token;
                 $user['desk']=Auth::user()->desk->only('id','desk_code','status');
                 $res=['success'=>true,'message'=>'Token successfully refreshed','errors'=>[],'data'=>$user];

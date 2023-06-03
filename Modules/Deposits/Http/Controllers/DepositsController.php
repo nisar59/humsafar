@@ -9,6 +9,7 @@ use Modules\Deposits\Entities\Deposits;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ClientSubscriptions;
 use App\Imports\DepositsVerificationImport;
+use App\Exports\GlobalSamplesExport;
 use App\Exports\DepositsExport;
 use DataTables;
 use Throwable;
@@ -100,7 +101,7 @@ class DepositsController extends Controller
                     }
                 })
                 ->editColumn('user_id', function ($row) {
-                    if($row->user->exists() && $row->user!=null){
+                    if($row->user()->exists() && $row->user!=null){
                         return $row->user->name;
                     }                
                 })
@@ -230,13 +231,27 @@ class DepositsController extends Controller
                 $deposits->update(['is_verified'=>1]);
             }
             else{
-                $faulty[]=$row['deposit_slip_no'];
+                $faulty[]=$row;
             }
         }
         DB::commit();
 
         if(count($faulty)>0){
-        return redirect()->back()->with('warning', 'Deposits successfully marked as verified except :'.implode(',', $faulty).' Deposit slips');
+            $req['file_name']='deposit-verify-sample';
+            $req['data']=$faulty;
+
+            $name='Not-verified-deposits-'.strtotime(now()).'.xlsx';
+
+            Excel::store(new GlobalSamplesExport($req), $name, 'exports');
+            
+           $log= GenerateImportExportLogs([
+                'file_name'=>$name,
+                'success'=>count($collection[0])- count($faulty),
+                'failed'=>count($faulty)
+            ]);
+
+
+            return redirect('import-export-logs/show/'.$log->id)->with('warning', 'File Uploaded successfully and verified : '.count($collection[0])- count($faulty). " Not verified : ".count($faulty));
         }
         return redirect()->back()->with('success', 'Deposits successfully marked as verified');
 

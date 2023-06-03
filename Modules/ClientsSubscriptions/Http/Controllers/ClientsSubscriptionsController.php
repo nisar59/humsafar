@@ -10,6 +10,7 @@ use Modules\Deposits\Entities\Deposits;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\SubScriptionServices;
 use App\Exports\SubscriptionServicesExport;
+use App\Exports\GlobalSamplesExport;
 use Modules\Clients\Entities\Client;
 use DataTables;
 use Throwable;
@@ -232,36 +233,51 @@ class ClientsSubscriptionsController extends Controller
 
         $faulty=[];
         
-        foreach ($collection[0] as $key => $row) {
-           $client=Client::where('cnic', $row['cnic'])->first();
+            foreach ($collection[0] as $key => $row) {
+               $client=Client::where('cnic', $row['cnic'])->first();
 
-           if($client!=null && $client->clientsubscriptions()->exists() && isset($row['username']) && $row['password']){
-                $client->clientsubscriptions()->update(['services'=>1]);
+               if($client!=null && $client->clientsubscriptions()->exists() && isset($row['username']) && $row['password']){
+                    $client->clientsubscriptions()->update(['services'=>1]);
 
-                /*/////////////////////Send SMS Notification///////////////////////////*/
+                    /*/////////////////////Send SMS Notification///////////////////////////*/
 
-                $msg="Sehat Kahani Services are Actived. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
-                $msg_res=SendMessage($client->phone_primary, $msg);
-                if($msg_res->success){
-                    $msg_res="And SMS Notification sent";
-                }else{
-                    $client->clientsubscriptions()->update(['services'=>0]);
-                    $faulty[]=$row['cnic'];
-                }
+                    $msg="Sehat Kahani Services are Activated. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
+                    $msg_res=SendMessage($client->phone_primary, $msg);
+                    if($msg_res->success){
+                        $msg_res="And SMS Notification sent";
+                    }else{
+                        $client->clientsubscriptions()->update(['services'=>0]);
+                        $faulty[]=$row['cnic'];
+                    }
 
-                /*/////////////////////////End SMS Notification////////////////////////*/
-           }else{
-            $faulty[]=$row['cnic'];
-           }
+                    /*/////////////////////////End SMS Notification////////////////////////*/
+               }else{
+                $faulty[]=$row;
+               }
 
 
-        }
+            }
             DB::commit();
             if(count($faulty)>0){
-            return redirect()->back()->with('warning', 'Services successfully Actived except '.implode(',', $faulty).' CNICs');
-            }else{
-            return redirect()->back()->with('success', 'Services successfully Actived & SMS Notification sent');
+                $req['file_name']='subscriptions-sample';
+                $req['data']=$faulty;
+
+                $name='Not-verified-subscriptions-'.strtotime(now()).'.xlsx';
+
+                Excel::store(new GlobalSamplesExport($req), $name, 'exports');
+                
+               $log= GenerateImportExportLogs([
+                    'file_name'=>$name,
+                    'success'=>count($collection[0])- count($faulty),
+                    'failed'=>count($faulty)
+                ]);
+
+
+                return redirect('import-export-logs/show/'.$log->id)->with('warning', 'File Uploaded successfully and Activated : '.count($collection[0])- count($faulty). " Pending : ".count($faulty));
             }
+
+
+            return redirect()->back()->with('success', 'Services successfully Activated & SMS Notification sent');
 
          }catch(Throwable $e){
             DB::rollback();

@@ -311,10 +311,10 @@ $users=User::with('cash_in_hand')->get();
     }
 
 
-    public function sample($sample)
+    public function sample(Request $req)
     {
         try {
-         return Excel::download(new GlobalSamplesExport($sample), $sample.'.xlsx');
+         return Excel::download(new GlobalSamplesExport($req), $req->file_name.'.xlsx');
 
         //return redirect()->back()->with('success', 'Subscription & Services successfully downloaded');
         }catch(Exception $e){

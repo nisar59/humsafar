@@ -33,6 +33,7 @@ Packages
               <tr>
                 <th>Title</th>
                 <th>Amount</th>
+                <th>Compensation</th>
                 <th>Subscription Type</th>
 <!--                 <th>Subscription Duration</th>
  -->                <th>Status</th>
@@ -61,6 +62,7 @@ buttons:[],
 columns: [
 {data: 'title', name: 'title'},
 {data: 'amount', name: 'amount'},
+{data: 'compensation', name: 'compensation'},
 {data: 'subscription_type', name: 'subscription_type'},
 //{data: 'subscription_duration', name: 'subscription_duration'},
 {data: 'status', name: 'status', class:'text-center'},

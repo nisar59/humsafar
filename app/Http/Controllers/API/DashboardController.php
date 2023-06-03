@@ -22,7 +22,8 @@ class DashboardController extends Controller
             }
 
 
-            $data['user'] = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id');
+            $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
+
             $data['user']['desk']=Auth::user()->desk->only('id','desk_code','status');
             $data['clients']['registered']=Client::where('desk_id', Auth::user()->desk->id)->count();
             $data['clients']['active']=Client::WhereHas('activesubscription')->where('desk_id', Auth::user()->desk->id)->count();
@@ -40,4 +41,28 @@ class DashboardController extends Controller
             return response()->json($res);        
         }    
     }
+
+    public function bankverification(Request $req)
+    {
+        try {
+           
+            $verification=$req->bank_account_verified;
+            $user=Auth::user();
+
+            $user->update(['bank_account_verified'=>$verification]);
+
+            $res=['success'=>true,'message'=>'Bank Account verification status successfully updated','errors'=>[],'data'=>null];
+
+            return response()->json($res);
+
+        } catch (Exception $e) {
+            $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+            return response()->json($res);
+        }catch(Throwable $e){
+            $res=['success'=>false,'message'=>'Something went wrong with this error: '.$e->getMessage(),'errors'=>[],'data'=>null];
+            return response()->json($res);        
+        } 
+    }
+
+
 }

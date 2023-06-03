@@ -14,5 +14,6 @@
     "Feedback": true,
     "FeedbackQuestions": true,
     "Trash": true,
-    "Banks": true
+    "Banks": true,
+    "ImportExportLogs": true
 }

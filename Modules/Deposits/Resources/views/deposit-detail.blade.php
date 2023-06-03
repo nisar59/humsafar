@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-8">
-                        <strong>Desk Code:</strong> {{$deposit->desk->desk_code}}<br>
+                        <strong>Desk Code:</strong> {{@$deposit->desk->desk_code}}<br>
                         <strong>Deposit Date:</strong> {{\Carbon\Carbon::parse($deposit->desposit_date)->format('d-m-Y')}}<br>
                         <strong>Deposit Slip No:</strong> {{$deposit->deposit_slip_no}}<br>
                         <strong>Deposit Amount:</strong> {{$deposit->amount}}

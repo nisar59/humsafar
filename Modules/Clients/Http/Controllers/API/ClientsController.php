@@ -122,6 +122,7 @@ class ClientsController extends Controller
             'dob'=>'required',
             'education'=>'required',
             'gender'=>'required',
+            'marital_status'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients'],
             'cnic'=>['required', 'max:15', 'unique:clients'],
             'email'=>['required', 'unique:clients'],
@@ -140,9 +141,15 @@ class ClientsController extends Controller
 
             $inputs['status']=0;
             $inputs['phone_verified']=0;
+            $inputs['marital_status']=0;
             if($req->phone_verified!=null){
                 $inputs['phone_verified']=1;
             }
+            
+            if($req->marital_status!=null){
+                $inputs['marital_status']=1;
+            }
+
             $inputs['desk_id']=Auth::user()->desk->id;
             $inputs['dob']=Carbon::parse($req->dob);
             $client=Client::create($inputs);
@@ -318,6 +325,7 @@ class ClientsController extends Controller
             'dob'=>'required',
             'education'=>'required',
             'gender'=>'required',
+            'marital_status'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients,phone_primary,'.$id],
             'cnic'=>['required', 'max:15', 'unique:clients,cnic,'.$id],
             'email'=>['required', 'unique:clients,email,'.$id],

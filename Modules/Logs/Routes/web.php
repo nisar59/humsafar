@@ -27,3 +27,11 @@ Route::group(['prefix'=>'system-logs','middleware' => ['permission:logs.delete']
     Route::get('/destroy/{id}', 'LogsController@systemlogsdestroy');
     Route::get('/truncate', 'LogsController@systemlogstruncate');
 });
+
+
+Route::group(['prefix'=>'import-export-logs','middleware' => ['permission:logs.delete']],function(){
+    Route::get('/', 'LogsController@importexportlogs');
+    Route::get('/show/{id}', 'LogsController@importexportlogsshow');
+    Route::get('/destroy/{id}', 'LogsController@importexportlogsdestroy');
+    Route::get('/truncate', 'LogsController@importexportlogstruncate');
+});
