@@ -14,10 +14,7 @@
      <th>Country</th>
      <th>State</th>
      <th>City</th>
-     <th>Package</th>
-     <th>Amount</th>
-     <th>Subscription Date</th>
-     <th>Expire Date</th>
+     <th>Expiry Date</th>
      <th>Relation</th>
     </tr>
     </thead>
@@ -96,23 +93,10 @@
                        {{$client->district}}
                     @endif                
                 </td>
-
-
-                <td>
-                    @if(PackageDetail($sub->package_id)!=null)
-                       {{PackageDetail($sub->package_id)->title}}
-                    @endif
-                </td>
-                <td>
-                    {{number_format($sub->amount)}}
-                </td>
-                <td>
-                    {{Carbon\Carbon::parse($sub->subscription_date)->format('d-m-Y');}}
-                </td>
                 <td>
                     {{Carbon\Carbon::parse($sub->expire_date)->format('d-m-Y');}}
                 </td>
-                <td>Self</td>
+                <td>Beneficiary</td>
             </tr>
         @endforeach
     </tbody>
