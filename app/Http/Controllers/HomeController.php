@@ -334,7 +334,7 @@ $users=User::with('cash_in_hand')->get();
             $sett=Settings();
             $sett->logging=0;
             $sett->save();
-            Artisan::call($command);
+            Artisan::call("'".$command."'");
             $res=Artisan::output();
             $sett=Settings();
             $sett->logging=1;
