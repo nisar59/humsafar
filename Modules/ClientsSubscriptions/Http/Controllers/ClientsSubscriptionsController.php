@@ -129,7 +129,7 @@ class ClientsSubscriptionsController extends Controller
 
                 ->editColumn('services', function ($row) {
                     if($row->services==1){
-                    return  '<a class="btn btn-success btn-sm" data-prompt-msg="" href="javascript:void(0)">Actived</a>';
+                    return  '<a class="btn btn-success btn-sm" data-prompt-msg="" href="javascript:void(0)">Activated</a>';
                     }
                     else{
                     return  '<a class="btn btn-danger btn-sm " data-prompt-msg="Are you sure you want to Active this Service" data-href="'.url('clients-subscriptions/services/'.$row->id).'">Pending</a>';
