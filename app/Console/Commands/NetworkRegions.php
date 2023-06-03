@@ -31,7 +31,7 @@ class NetworkRegions extends Command
     {  
         DB::beginTransaction();
         try {
-            $url='http://mis.akhuwat.org.pk/api/cih/get-network';
+            $url='http://credit.akhuwat.org.pk/api/cih/get-network';
             $data=['key'=>'regions'];
             $type="post";
             $res=ApiCall($type,$url,$data);
