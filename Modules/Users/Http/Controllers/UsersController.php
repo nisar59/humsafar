@@ -122,6 +122,14 @@ class UsersController extends Controller
                         return  '<a class="btn btn-danger btn-sm" href="'.url('users/status/'.$row->id).'">Deactive</a>';
                     }
                 })
+                ->editColumn('bank_account_verified', function ($row) {
+                    if($row->bank_account_verified==1){
+                        return  '<a class="btn btn-success btn-sm" href="javascript:void(0)">verified</a>';
+                    }
+                    else{
+                        return  '<a class="btn btn-danger btn-sm" href="javascript:void(0)">Not verified</a>';
+                    }
+                })
 
                 ->editColumn('branch_id', function ($row) {
                     return BranchDetail($row->branch_id)!=null ? BranchDetail($row->branch_id)->name: '';
@@ -132,7 +140,7 @@ class UsersController extends Controller
                 ->editColumn('access_level', function ($row) {
                     return $row->access_level;
                 })
-                ->rawColumns(['action','role','status'])
+                ->rawColumns(['action','role','status', 'bank_account_verified'])
                 ->make(true);
     }
 

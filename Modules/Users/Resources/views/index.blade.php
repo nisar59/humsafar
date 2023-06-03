@@ -70,7 +70,7 @@ Users
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-sm table-hover table-bordered" id="data_table" style="width:100%;">
+          <table class="table table-sm table-hover table-responsive table-bordered" id="data_table" style="width:100%;">
             <thead class="text-center bg-primary text-white">
               <tr>
                 <th>Name</th>
@@ -85,6 +85,7 @@ Users
                 <th>Bank</th>
                 <th>Account Title</th>
                 <th>Account No</th>
+                <th>Account Verification</th>
                 <th>Date</th>
                 <th>Action</th>
               </tr>
@@ -125,6 +126,7 @@ $(document).ready( function(){
             {data: 'bank_name', name: 'bank_name',class:'text-center'},
             {data: 'bank_account_title', name: 'bank_account_title',class:'text-center'},
             {data: 'bank_account_no', name: 'bank_account_no',class:'text-center'},
+            {data: 'bank_account_verified', name: 'bank_account_verified',class:'text-center'},
             {data: 'created_at', name: 'created_at',class:'text-center'},
             {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},
       ]
