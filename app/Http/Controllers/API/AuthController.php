@@ -185,9 +185,11 @@ class AuthController extends Controller
             }
             else{
                 $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
-                $data['user']['branch']=Auth::user()->branch->only('id','name','status');
-                $data['user']['area']=Auth::user()->area->only('id','name','status');
-                $data['user']['region']=Auth::user()->region->only('id','name','status');
+
+
+                $user['user']['branch']=Auth::user()->branch;
+                $user['user']['area']=Auth::user()->area;
+                $user['user']['region']=Auth::user()->region;
 
 
                 $user['access_token']=$token;
@@ -257,9 +259,10 @@ class AuthController extends Controller
             }
             else{
                 $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
-                $data['user']['branch']=Auth::user()->branch->only('id','name','status');
-                $data['user']['area']=Auth::user()->area->only('id','name','status');
-                $data['user']['region']=Auth::user()->region->only('id','name','status');
+                
+                $user['user']['branch']=Auth::user()->branch;
+                $user['user']['area']=Auth::user()->area;
+                $user['user']['region']=Auth::user()->region;
 
                 
                 $user['access_token']=$token;
