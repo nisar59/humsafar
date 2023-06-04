@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Modules\Regions\Entities\Regions;
+use Modules\Areas\Entities\Areas;
 use Modules\Branches\Entities\Branches;
 use App\Models\ClientSubscriptions;
 use Modules\Desks\Entities\Desk;
@@ -69,5 +71,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Branches::class, 'id', 'branch_id');
     }
+
+    public function area()
+    {
+        return $this->hasOne(Areas::class, 'id', 'area_id');
+    }
+
+    public function region()
+    {
+        return $this->hasOne(Regions::class, 'id', 'region_id');
+    }
+
 
 }

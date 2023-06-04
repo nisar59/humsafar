@@ -24,7 +24,13 @@ class DashboardController extends Controller
 
             $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
 
+            $data['user']['branch']=Auth::user()->branch->only('id','name','status');
+            $data['user']['area']=Auth::user()->area->only('id','name','status');
+            $data['user']['region']=Auth::user()->region->only('id','name','status');
+
             $data['user']['desk']=Auth::user()->desk->only('id','desk_code','status');
+
+
             $data['clients']['registered']=Client::where('desk_id', Auth::user()->desk->id)->count();
             $data['clients']['active']=Client::WhereHas('activesubscription')->where('desk_id', Auth::user()->desk->id)->count();
             $data['subscriptions']=ClientSubscriptions::where('deposit_id',null)->sum('amount');

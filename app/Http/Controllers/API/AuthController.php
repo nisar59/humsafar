@@ -185,6 +185,10 @@ class AuthController extends Controller
             }
             else{
                 $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
+                $data['user']['branch']=Auth::user()->branch->only('id','name','status');
+                $data['user']['area']=Auth::user()->area->only('id','name','status');
+                $data['user']['region']=Auth::user()->region->only('id','name','status');
+
 
                 $user['access_token']=$token;
                 $user['desk']=Auth::user()->desk->only('id','desk_code','status');
@@ -253,6 +257,11 @@ class AuthController extends Controller
             }
             else{
                 $user = Auth::user()->only('id','name','phone','cnic','emp_code','role_name','status','is_block','access_level','branch_id','bank_name','bank_account_title','bank_account_no','bank_account_verified');
+                $data['user']['branch']=Auth::user()->branch->only('id','name','status');
+                $data['user']['area']=Auth::user()->area->only('id','name','status');
+                $data['user']['region']=Auth::user()->region->only('id','name','status');
+
+                
                 $user['access_token']=$token;
                 $user['desk']=Auth::user()->desk->only('id','desk_code','status');
                 $res=['success'=>true,'message'=>'Token successfully refreshed','errors'=>[],'data'=>$user];
