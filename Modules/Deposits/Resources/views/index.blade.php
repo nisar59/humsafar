@@ -70,6 +70,9 @@ Deposits
                 <th>Desk Code</th>
                 <th>User</th>
                 <th>Amount</th>
+                <th>Due Compensation</th>
+                <th>Paid Compensation</th>
+                <th>Pending Compensation</th>
                 <th>Deposit Slip No</th>
                 <th>Deposit Date</th>
                 <th>Deposit slip</th>
@@ -87,9 +90,10 @@ Deposits
     </div>
   </div>
 </div>
-<div id="mdl">
+<div id="bulk-verify">
 @include('deposits::bulk-verify')
 </div>
+<div id="mdl"></div>
 @endsection
 @section('js')
 <script type="text/javascript">
@@ -109,6 +113,9 @@ $(document).ready( function(){
       {data: 'desk_id', name: 'desk_id'},
       {data: 'user_id', name: 'user_id'},
       {data: 'amount', name: 'amount'},
+      {data: 'due_compensation', name: 'due_compensation'},
+      {data: 'paid_compensation', name: 'paid_compensation'},
+      {data: 'pending_compensation', name: 'pending_compensation'},
       {data: 'deposit_slip_no', name: 'deposit_slip_no'},
       {data: 'desposit_date', name: 'desposit_date'},
       {data: 'deposit_slip', name: 'deposit_slip', class:"text-center"},
@@ -140,6 +147,28 @@ DataTableInit(data);
 
 
 $(document).on("click", '.show-details', function() {
+var url=$(this).data('href');
+  $.ajax({
+    url:url,
+    type:"GET",
+    success:function(res){
+      if(res.success){
+      $("#mdl").html(res.data);
+      $("#deposit-detail").modal('show');
+      }
+      else{
+      error('Something went wrong');
+      }
+    },
+    error:function(err) {
+      error('Something went wrong');
+    }
+  });
+
+});
+
+
+$(document).on("click", '.pay-compensation', function() {
 var url=$(this).data('href');
   $.ajax({
     url:url,

@@ -62,6 +62,8 @@ class DepositsController extends Controller
                 ->addColumn('action', function ($row) {
                     $action='';
                 if(Auth::user()->can('deposits.view')){
+                $action.='<a class="btn btn-info m-1 btn-sm pay-compensation" data-href="'.url('deposits/compensation/'.$row->id).'" href="javascript:void(0)"><i class="fas fa-money-bill-alt"></i></a>';
+
                 $action.='<a class="btn btn-success m-1 btn-sm show-details " href="javascript:void(0)" data-href="'.url('deposits/show/'.$row->id).'"><i class="fas fa-eye"></i></a>';
                 }
                 if(Auth::user()->can('deposits.delete')){
@@ -108,6 +110,16 @@ class DepositsController extends Controller
                 ->editColumn('amount', function ($row) {
                      return number_format($row->amount);
                  })
+                ->editColumn('due_compensation', function ($row) {
+                     return number_format($row->due_compensation);
+                 })
+                ->editColumn('paid_compensation', function ($row) {
+                     return number_format($row->paid_compensation);
+                 })
+                ->editColumn('pending_compensation', function ($row) {
+                     return number_format($row->pending_compensation);
+                 })    
+
                 ->editColumn('deposit_slip_no', function ($row) {
                     return $row->deposit_slip_no;
                 })
@@ -173,6 +185,7 @@ class DepositsController extends Controller
      * @param int $id
      * @return Renderable
      */
+
     public function show($id)
     {
 
@@ -181,6 +194,50 @@ class DepositsController extends Controller
         return response()->json(['success'=>true, 'data'=>$html]);
 
     }
+
+    public function compensation($id)
+    {
+
+        $deposit=Deposits::find($id);
+        $html= view('deposits::compensation')->withDeposit($deposit)->render();
+        return response()->json(['success'=>true, 'data'=>$html]);
+
+    }
+
+    public function compensationstore(Request $req, $id)
+    {
+        $req->validate([
+            'compensation_to_pay'=>['required', 'numeric']
+        ]);
+        DB::beginTransaction();
+        try {
+
+            $deposit=Deposits::find($id);
+            if($deposit==null){
+            return redirect()->back()->with('error', 'Something went wrong with this error: Deposit not found');
+            }
+
+            $pending=$deposit->pending_compensation;
+            $paid=$deposit->paid_compensation;
+
+            $deposit->paid_compensation=(int)$paid + (int)$req->compensation_to_pay;
+            $deposit->pending_compensation=(int)$pending - (int)$req->compensation_to_pay;
+
+            $deposit->save();
+
+            DB::commit();
+            return redirect('deposits')->with('success', 'Compensation successfully marked as paid');
+            
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+        catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+    }
+
 
     /**
      * Show the form for editing the specified resource.

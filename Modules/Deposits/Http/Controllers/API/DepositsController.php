@@ -73,6 +73,15 @@ class DepositsController extends Controller
         $csids=$req->client_subscription_ids;
         $client_subscriptions=ClientSubscriptions::whereIn('id',$csids)->where('deposit_id',null);
 
+        $client_subscriptions_copy=clone $client_subscriptions;
+
+        $compensation=0;
+
+        foreach ($client_subscriptions_copy->get() as $cs) {
+            $compensation+= PackageDetail($cs->package_id)!=null ? (int) PackageDetail($cs->package_id)->compensation : 0; 
+        }
+
+
         if($req->amount!=$client_subscriptions->sum('amount')){
         $res=['success'=>false,'message'=>"sorry amount not matched with our database records, please refresh and try again",'errors'=>[],'data'=>null];
         return response()->json($res);        
@@ -84,6 +93,9 @@ class DepositsController extends Controller
             'user_id'=>$user->id,
             'desk_id'=>$user->desk->id,
             'amount'=>$req->amount,
+            'due_compensation'=>$compensation,
+            'paid_compensation'=>0,
+            'pending_compensation'=>$compensation,
             'desposit_date'=>now(),
             'deposit_slip'=>Base64FileUpload($req->deposit_slip, $path),
             'deposit_slip_no'=>$req->deposit_slip_no,

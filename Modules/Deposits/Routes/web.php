@@ -28,6 +28,8 @@ Route::group(['prefix'=>'deposits','middleware' => ['permission:deposits.edit']]
     Route::get('/status/{id}', 'DepositsController@status');
     Route::get('/verify/{id}', 'DepositsController@verify');
     Route::post('/bulk-verification/', 'DepositsController@bulkverification');
+    Route::get('/compensation/{id}', 'DepositsController@compensation');
+    Route::post('/compensation-store/{id}', 'DepositsController@compensationstore');
 });
 Route::group(['prefix'=>'deposits','middleware' => ['permission:deposits.delete']],function(){
     Route::get('/destroy/{id}', 'DepositsController@destroy');

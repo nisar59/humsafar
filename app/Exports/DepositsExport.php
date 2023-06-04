@@ -40,8 +40,8 @@ class DepositsExport implements FromView
       if ($req->desposit_date != null) {
         $deposits->whereDate('desposit_date', $req->desposit_date);
       }    
-      if ($req->verified != null) {
-        $deposits->where('verified', $req->verified);
+      if ($req->is_verified != null) {
+        $deposits->where('is_verified', $req->is_verified);
       }  
 
       $deposits=$deposits->get();
