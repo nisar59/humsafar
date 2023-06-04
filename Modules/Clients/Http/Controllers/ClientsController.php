@@ -198,6 +198,7 @@ class ClientsController extends Controller
             'education'=>'required',
             'gender'=>'required',
             'marital_status'=>'required',
+            'relation'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients'],
             'phone_secondary'=>'required',
             'cnic'=>['required', 'max:15', 'unique:clients'],
@@ -214,15 +215,12 @@ class ClientsController extends Controller
 
             $inputs['status']=0;
             $inputs['phone_verified']=0;
-            $inputs['marital_status']=0;
 
 
             if($req->phone_verified!=null){
                 $inputs['phone_verified']=1;
             }
-            if($req->marital_status!=null){
-                $inputs['marital_status']=1;
-            }
+
             $client=Client::create($inputs);
 
             if($req->package_id!=null){
@@ -400,6 +398,7 @@ class ClientsController extends Controller
             'education'=>'required',
             'gender'=>'required',            
             'marital_status'=>'required',
+            'relation'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients,phone_primary,'.$id],
             'phone_secondary'=>'required',
             'cnic'=>['required', 'max:15', 'unique:clients,cnic,'.$id],

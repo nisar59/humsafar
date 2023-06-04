@@ -15,7 +15,7 @@ class Client extends Model
     use HasFactory,SoftDeletes,Loggable;
 
     protected $table='clients';
-    protected $fillable = ['desk_id','name','parentage','dob','education','gender','marital_status','phone_primary','phone_secondary','cnic','email','monthly_income','address','province','district','medical_expense','phone_verified','status'];
+    protected $fillable = ['desk_id','name','parentage','dob','education','gender','marital_status','relation','phone_primary','phone_secondary','cnic','email','monthly_income','address','province','district','medical_expense','phone_verified','status'];
     
     protected static function newFactory()
     {

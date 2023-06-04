@@ -66,10 +66,22 @@ Client
             <div class="col-md-4 form-group">
               <label for="">Marital Status</label>
               <select name="marital_status" class="form-control select2">
-                <option value="1" @if(old('marital_status', $client->marital_status)==1) selected @endif>Married</option>
-                <option value="0" @if(old('marital_status', $client->marital_status)==0) selected @endif>Unmarried</option>
+                  <option value="">Select</option>
+                  @foreach(MaritalStatus() as $mskey=> $ms)
+                  <option value="{{$mskey}}" @if(old('marital_status', $client->marital_status)==$mskey) selected @endif>{{$ms}}</option>
+                  @endforeach
               </select>
             </div>
+            <div class="col-md-4 form-group">
+              <label for="">Relation</label>
+              <select name="relation" class="form-control select2">
+                  <option value="">Select</option>
+                  @foreach(RelationWith() as $rwkey=> $rw)
+                  <option value="{{$rwkey}}" @if(old('relation', $client->relation)==$mskey) selected @endif>{{$rw}}</option>
+                  @endforeach
+              </select>
+            </div>
+
             <div class="col-md-4 form-group">
               <label for="">Phone No Primary</label>
               <input type="text" class="form-control" value="{{old('phone_primary',$client->phone_primary)}}" name="phone_primary" placeholder="Phone No Primary">

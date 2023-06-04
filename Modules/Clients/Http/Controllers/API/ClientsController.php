@@ -53,7 +53,9 @@ class ClientsController extends Controller
         try {
             $data=[
                 'education'=>Education(),
-                'province_district'=>json_decode(ProvincesDistricts())
+                'province_district'=>json_decode(ProvincesDistricts()),
+                'marital_status'=>MaritalStatus(),
+                'relation'=>RelationWith(),
             ];
 
         $res=['success'=>true,'message'=>'Education and Province Districts List is fetched','errors'=>[],'data'=>$data];
@@ -122,7 +124,8 @@ class ClientsController extends Controller
             'dob'=>'required',
             'education'=>'required',
             'gender'=>'required',
-            //'marital_status'=>'required',
+            'marital_status'=>'required',
+            'relation'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients'],
             'cnic'=>['required', 'max:15', 'unique:clients'],
             'email'=>['required', 'unique:clients'],
@@ -141,14 +144,10 @@ class ClientsController extends Controller
 
             $inputs['status']=0;
             $inputs['phone_verified']=0;
-            $inputs['marital_status']=0;
             if($req->phone_verified!=null){
                 $inputs['phone_verified']=1;
             }
             
-            if($req->marital_status!=null){
-                $inputs['marital_status']=1;
-            }
 
             $inputs['desk_id']=Auth::user()->desk->id;
             $inputs['dob']=Carbon::parse($req->dob);
@@ -327,7 +326,8 @@ class ClientsController extends Controller
             'dob'=>'required',
             'education'=>'required',
             'gender'=>'required',
-            //'marital_status'=>'required',
+            'marital_status'=>'required',
+            'relation'=>'required',
             'phone_primary'=>['required', 'max:12', 'unique:clients,phone_primary,'.$id],
             'cnic'=>['required', 'max:15', 'unique:clients,cnic,'.$id],
             'email'=>['required', 'unique:clients,email,'.$id],

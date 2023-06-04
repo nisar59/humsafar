@@ -429,6 +429,31 @@ function FeedBackTypes()
 	return $feedbacktypes;
 }
 
+function MaritalStatus()
+{
+	$marital_status=[
+		0=>'Single',
+		1=>'Married',
+		2=>'Widow',
+		3=>'Divorced',
+		4=>'Separated'
+	];
+
+	return $marital_status;
+
+}
+
+function RelationWith()
+{
+	$relation=[
+			0=>'Employee',
+			1=>'Beneficiary'
+
+	];
+
+	return $relation;
+}
+
 
 function ProvincesDistricts()
 {
