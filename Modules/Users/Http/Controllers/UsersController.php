@@ -181,7 +181,9 @@ class UsersController extends Controller
             foreach($collection[0] as $key => $row){
                 $error_index=$key+1;
 
-                if(User::where('cnic',$row['cnic'])->orWhere('phone',$row['phone'])->orWhere('emp_code',$row['emp_code'])->count()<1){
+                $user=User::where('cnic',$row['cnic'])->orWhere('phone',$row['phone'])->orWhere('emp_code',$row['emp_code']);
+
+                if($user->count()<1){
 
                     $branch=BranchDetail($row['branch_id']);
                     if($branch!=null){
@@ -195,7 +197,9 @@ class UsersController extends Controller
 
                 }
                 else{
-                    $faulty[]=$row;
+                    if(!$user->update($row)){
+                        $faulty[]=$row;
+                    }
                 }
 
             }
