@@ -241,7 +241,7 @@ class ClientsSubscriptionsController extends Controller
 
                     /*/////////////////////Send SMS Notification///////////////////////////*/
 
-                    $msg="Sehat Kahani Services are Activated. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
+                    $msg="Humsafar Account is Activated. username :".$row['username']." password :".$row['password']. " , Contact us: 0309-8889395";
                     $msg_res=SendMessage($client->phone_primary, $msg);
                     if($msg_res->success){
                         $msg_res="And SMS Notification sent";
@@ -310,13 +310,13 @@ class ClientsSubscriptionsController extends Controller
 
             /*/////////////////////Send SMS Notification///////////////////////////*/
 
-            $msg="Your Services of ".Settings()->portal_name." have been successfully Actived.";
+/*            $msg="Humsafar Account is Activated. username :".$row['username']." password :".$row['password']. " , Contact us: 0309-8889395";
             $msg_res=SendMessage($client->phone_primary, $msg);
             if($msg_res->success){
                 $msg_res="And SMS Notification sent";
             }else{
                 $msg_res="And SMS Notification Not sent because ".$msg_res->message;
-            }
+            }*/
 
             /*/////////////////////////End SMS Notification////////////////////////*/
 
