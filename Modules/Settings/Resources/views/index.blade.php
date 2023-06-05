@@ -44,6 +44,10 @@ $favicon=url('public/img/settings/'.$sett->portal_favicon);
                 <a class="list-group-item text-center rounded-0" data-bs-toggle="tab" href="#sms-configurations" role="tab">
                   SMS Configurations
                 </a>
+                <a class="list-group-item text-center rounded-0" data-bs-toggle="tab" href="#mobile-app-configurations" role="tab">
+                  Mobile App Configurations
+                </a>
+
               </div>
             </div>
             <!-- Tab panes -->
@@ -108,6 +112,16 @@ $favicon=url('public/img/settings/'.$sett->portal_favicon);
                   </div>
                  </div>
                 </div>
+                <div class="tab-pane p-3" id="mobile-app-configurations" role="tabpanel">
+                 <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label>App Version</label>
+                      <input type="text" class="form-control" value="{{$sett->version}}" name="version" placeholder="Mobile App Version">   
+                  </div>
+                 </div>
+                </div>
+
+
               </div>
             </div>
           </div>

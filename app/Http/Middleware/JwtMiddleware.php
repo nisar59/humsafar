@@ -15,6 +15,14 @@ class JwtMiddleware extends BaseMiddleware
      */
     public function handle($req, Closure $next)
     {
+        $version=Settings()!=null ? (int) Settings()->version : 0;
+
+        $req_version=(int) $req->header('version');
+
+        if($req_version!=$version){
+                return response()->json(['status' => 'Please update your app to following version: v'.$version], 401);
+        }
+
         try
         {
             $user = JWTAuth::parseToken()->authenticate();
