@@ -36,7 +36,7 @@ class HomeController extends Controller
     public function index()
     {        $row['username']='test';
             $row['password']='password';
-                    $msg="Telehealth Services are Activated. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
+                    $msg="Telehealth Services are Activated. username :".$row['username']." password :".$row['password']. " , Contact us: 0309-8889395";
                     $msg_res=SendMessage('03025869931', $msg);
 
                     dd($msg_res);
