@@ -62,8 +62,8 @@ class DepositsController extends Controller
                 ->addColumn('action', function ($row) {
                     $action='';
                 if(Auth::user()->can('deposits.view')){
-                $action.='<a class="btn btn-info m-1 btn-sm pay-compensation" data-href="'.url('deposits/compensation/'.$row->id).'" href="javascript:void(0)"><i class="fas fa-money-bill-alt"></i></a>';
-
+/*                $action.='<a class="btn btn-info m-1 btn-sm pay-compensation" data-href="'.url('deposits/compensation/'.$row->id).'" href="javascript:void(0)"><i class="fas fa-money-bill-alt"></i></a>';
+*/
                 $action.='<a class="btn btn-success m-1 btn-sm show-details " href="javascript:void(0)" data-href="'.url('deposits/show/'.$row->id).'"><i class="fas fa-eye"></i></a>';
                 }
                 if(Auth::user()->can('deposits.delete')){
