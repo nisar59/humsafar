@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix'=>'users','middleware'=>'api'],function(){
+Route::group(['prefix'=>'users','middleware'=>['api','version']],function(){
 Route::POST('verify-user', 'API\AuthController@verifyuser');
 Route::POST('verify-otp', 'API\AuthController@verifyotp');
 Route::POST('set-pin', 'API\AuthController@setpin');
