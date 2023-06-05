@@ -10,6 +10,9 @@
     <th>role_name</th>
     <th>access_level</th>
     <th>branch_id</th>
+    <th>bank_name</th>
+    <th>bank_account_title</th>
+    <th>bank_account_no</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +28,9 @@
             <td>{{$vl['role_name']}}</td>
             <td>{{$vl['access_level']}}</td>
             <td>{{$vl['branch_id']}}</td>
+            <td>{{$vl['bank_name']}}</td>
+            <td>{{$vl['bank_account_title']}}</td>
+            <td>{{$vl['bank_account_no']}}</td>
         </tr>
         @endforeach
         @endif
