@@ -34,12 +34,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {       /* $row['username']='test';
+    {        $row['username']='test';
             $row['password']='password';
                     $msg="Sehat Kahani Services are Activated. username :".$row['username']." password :".$row['password']. " For any issues, call us: 0309-8889395";
                     $msg_res=SendMessage('03224272106', $msg);
 
-                    dd($msg_res);*/
+                    dd($msg_res);
 
 
         User::find(Auth::id())->update([
