@@ -97,7 +97,7 @@
                     {{Carbon\Carbon::parse($sub->expire_date)->format('d-m-Y');}}
                 </td>
                 <td>
-                    {{isset(RelationWith()[$client->relation]) ? RelationWith()[$client->relation] : 'Beneficiary']}}
+                    {{isset(RelationWith()[$client->relation]) ? RelationWith()[$client->relation] : 'Beneficiary'}}
                 </td>
             </tr>
         @endforeach
