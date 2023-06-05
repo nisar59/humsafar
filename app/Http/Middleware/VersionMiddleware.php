@@ -26,6 +26,6 @@ class VersionMiddleware
         }
 
         
-        return $next($request);
+        return $next($req);
     }
 }
