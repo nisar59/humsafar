@@ -16,11 +16,12 @@ class JwtMiddleware extends BaseMiddleware
     public function handle($req, Closure $next)
     {
         $version=Settings()!=null ? (int) Settings()->version : 0;
+        $url=Settings()!=null ? Settings()->app_url : 'Contact to Admin';
 
         $req_version=(int) $req->header('version');
 
         if($req_version!=$version){
-                return response()->json(['status' => 'Please update your app to following version: v'.$version], 401);
+                return response()->json(['status' => 'Please update your app to following version: v'.$version, 'url'=>$url], 401);
         }
 
         try

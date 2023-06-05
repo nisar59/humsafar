@@ -114,10 +114,15 @@ $favicon=url('public/img/settings/'.$sett->portal_favicon);
                 </div>
                 <div class="tab-pane p-3" id="mobile-app-configurations" role="tabpanel">
                  <div class="row">
-                  <div class="col-md-12 form-group">
+                  <div class="col-md-6 form-group">
                     <label>App Version</label>
                       <input type="text" class="form-control" value="{{$sett->version}}" name="version" placeholder="Mobile App Version">   
                   </div>
+                  <div class="col-md-6 form-group">
+                    <label>App URL</label>
+                      <input type="text" class="form-control" value="{{$sett->app_url}}" name="app_url" placeholder="Mobile App URL">   
+                  </div>
+
                  </div>
                 </div>
 

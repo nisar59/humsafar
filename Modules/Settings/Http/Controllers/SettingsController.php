@@ -63,6 +63,7 @@ class SettingsController extends Controller
         $settings->logs_duration_type=$req->logs_duration_type;
         $settings->sms_notifications=$req->sms_notifications;
         $settings->version=$req->version;
+        $settings->app_url=$req->app_url;
 
         if($settings->save()){
             return redirect()->back()->with('success', 'Panel settings successfully saved');
