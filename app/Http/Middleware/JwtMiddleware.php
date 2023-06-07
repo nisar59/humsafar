@@ -21,7 +21,7 @@ class JwtMiddleware extends BaseMiddleware
         $req_version=(int) $req->header('version');
 
         if($req_version!=$version){
-                return response()->json(['status' => 'Please update your app to following version: v'.$version, 'url'=>$url, 'error_code'=>403], 403);
+                return response()->json(['status' => 'Please update your app to following version: v'.$version, 'url'=>$url, 'error_code'=>403], 200);
         }
 
         try
