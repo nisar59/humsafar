@@ -28,5 +28,5 @@ Route::group(['prefix'=>'dashboard','middleware' => ['jwt.verify']],function(){
 });
 
 Route::group(['prefix'=>'users','middleware' => ['jwt.verify']],function(){
-    Route::post('/bank-account-verified', 'API\DashboardController@index');    
+    Route::post('/bank-account-verified', 'API\DashboardController@bankverification');    
 });
