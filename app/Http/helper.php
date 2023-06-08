@@ -170,7 +170,7 @@ function SendMessage($phone, $msg)
     
    $key='f91190ce327626b6331cc3538ad61828';
    $sender='Humsafar';
-    $url="https://bsms.its.com.pk/api.php?key=".$key."&msgdata=".urlencode($msg)."&receiver=".$phone."&sender=".$sender;
+    $url="http://bsms.its.com.pk/api.php?key=".$key."&msgdata=".urlencode($msg)."&receiver=".$phone."&sender=".$sender;
     $res= Http::get($url);
     $body=json_decode($res->body());
     
