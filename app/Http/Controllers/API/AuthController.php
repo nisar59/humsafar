@@ -14,6 +14,11 @@ class AuthController extends Controller
     public function __construct()
     {
         auth()->setDefaultDriver('api');
+
+        if(request()->phone!=null){
+            $phn = '92'.substr(request()->phone, 1);
+            request()->phone=$phn;
+        }
     }
 
 
