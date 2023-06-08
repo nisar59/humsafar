@@ -34,12 +34,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {        $row['username']='test';
+    {       /* $row['username']='test';
             $row['password']='password';
                     $msg="Humsafar Account is Activated. username :".$row['username']." password :".$row['password']. " , Contact us: 0309-8889395";
                     $msg_res=SendMessage('03025869931', $msg);
 
-                    dd($msg_res);
+                    dd($msg_res);*/
 
 
         User::find(Auth::id())->update([
