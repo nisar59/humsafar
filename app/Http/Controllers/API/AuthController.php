@@ -15,10 +15,10 @@ class AuthController extends Controller
     {
         auth()->setDefaultDriver('api');
 
-        if(request()->phone!=null){
+/*        if(request()->phone!=null){
             $phn = '92'.substr(request()->phone, 1);
             request()->phone=$phn;
-        }
+        }*/
     }
 
 
