@@ -143,8 +143,8 @@ function GenerateDeskCode($branch_code)
 {
 	$code=strtoupper('desk-'.$branch_code.'-'.substr(sha1(time()), 0, 5));
 
-	if(Desk::where('desk_code',$code)->count()>0){
-		GenerateDeskCode();
+	if($code==null OR Desk::where('desk_code',$code)->count()>0){
+		return GenerateDeskCode($branch_code);
 	}
 	else{
 		return $code;

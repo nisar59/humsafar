@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\NetworkRegions::class,
         Commands\NetworkAreas::class,
         Commands\NetworkBranches::class,
+        Commands\BulkDeskCreation::class,
     ];
      
 
