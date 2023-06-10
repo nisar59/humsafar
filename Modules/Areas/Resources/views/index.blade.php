@@ -62,7 +62,7 @@ buttons:[],
 columns: [
 {data: 'name', name: 'name'},
 {data: 'code', name: 'code'},
-{data: 'region_id', name: 'region_id.name'},
+{data: 'region_id', name: 'region_id.name',class:'text-center', orderable: false, searchable: false},
 {data: 'status', name: 'status', class:'text-center'},
 {data: 'modified_by', name: 'modified_by', class:'text-center', orderable: false, searchable: false},
 {data: 'action', name: 'action', orderable: false, class:"d-flex justify-content-center w-auto", searchable: false},
