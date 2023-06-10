@@ -207,11 +207,13 @@ Dashboard
               </tr>
               @endif
               @endforeach
+            </tbody>
+            <tfoot>
               <tr>
                 <th colspan="3">Total</th>
                 <th>{{number_format($total_cih)}}</th>
               </tr>
-            </tbody>
+            </tfoot>
           </table>
         </div>
       </div>
