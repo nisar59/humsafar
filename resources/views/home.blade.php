@@ -197,7 +197,7 @@ Dashboard
               @foreach($users as $user)
               @if($user->desk()->exists())
                 @php
-                  $total_cih+=$user->cash_in_hand()->exists() ? number_format($user->cash_in_hand->sum('amount')) : 0;
+                  $total_cih+=$user->cash_in_hand()->exists() ? (int) $user->cash_in_hand->sum('amount') : 0;
                 @endphp
                 <tr>
                 <td>{{$user->name}}</td>
