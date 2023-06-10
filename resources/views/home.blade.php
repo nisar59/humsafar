@@ -193,17 +193,19 @@ Dashboard
             <tbody>
               @php
                 $total_cih=0;
+                $cih=0
               @endphp
               @foreach($users as $user)
               @if($user->desk()->exists())
                 @php
-                  $total_cih=+$user->cash_in_hand()->exists() ? (int) $user->cash_in_hand->sum('amount') : 0;
+                  $cih=$user->cash_in_hand()->exists() ? (int) $user->cash_in_hand->sum('amount') : 0;
+                  $total_cih=$total_cih+$cih;
                 @endphp
                 <tr>
                 <td>{{$user->name}}</td>
                 <td>{{$user->phone}}</td>
                 <td>{!! $user->branch!=null ? $user->branch->name : '<a href="'.url('users/edit/'.$user->id).'" class="text-danger">Not found</a>' !!}</td>
-                <td>{{$user->cash_in_hand()->exists() ? number_format($user->cash_in_hand->sum('amount')) : ''; }}</td>
+                <td>{{ number_format($cih) }}</td>
               </tr>
               @endif
               @endforeach
