@@ -69,17 +69,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function branch()
     {
-        return $this->hasOne(Branches::class, 'id', 'branch_id');
+        return $this->hasOne(Branches::class, 'mis_sync_id', 'branch_id');
     }
 
     public function area()
     {
-        return $this->hasOne(Areas::class, 'id', 'area_id');
+        return $this->hasOne(Areas::class, 'mis_sync_id', 'area_id');
     }
 
     public function region()
     {
-        return $this->hasOne(Regions::class, 'id', 'region_id');
+        return $this->hasOne(Regions::class, 'mis_sync_id', 'region_id');
     }
 
 
