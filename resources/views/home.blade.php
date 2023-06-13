@@ -196,7 +196,7 @@ Dashboard
                 $cih=0
               @endphp
               @foreach($users as $user)
-              @if($user->desk()->exists())
+              @if($user->desk()->exists() OR $user->cash_in_hand()->exists())
                 @php
                   $cih=$user->cash_in_hand()->exists() ? (int) $user->cash_in_hand->sum('amount') : 0;
                   $total_cih=$total_cih+$cih;
