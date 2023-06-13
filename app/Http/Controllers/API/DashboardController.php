@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
             $data['clients']['registered']=Client::where('desk_id', Auth::user()->desk->id)->count();
             $data['clients']['active']=Client::WhereHas('activesubscription')->where('desk_id', Auth::user()->desk->id)->count();
-            $data['subscriptions']=ClientSubscriptions::where('deposit_id',null)->where('user_id', Auth::user()->id)->sum('amount');
+            $data['subscriptions']=ClientSubscriptions::where('deposit_id',null)->where('desk_id', Auth::user()->desk->id)->sum('amount');
             $res=['success'=>true,'message'=>'Dashboard stats fetched successfully','errors'=>[],'data'=>$data];
             return response()->json($res);
 

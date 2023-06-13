@@ -151,6 +151,19 @@ class DesksController extends Controller
               if($branch==null){
                 return redirect()->back()->with('error', 'Sorry Branch Detail not found with this Branch MIS Sync ID :'.$user->branch_id);
               }
+
+              $desks=Desk::with('deskuser')->where('branch_id',$user->branch_id)->get();
+              $not_exist=[];
+              foreach ($desks as $key => $desk) {
+                if(!$desk->deskuser()->exists())
+                 $not_exist[]=$desk->desk_code;
+              }
+
+            if(count($not_exist)>0){
+                return redirect()->back()->with('warning', 'There are '.count($not_exist).' unassociated desks available, consider re-association :'.implode(', ', $not_exist));
+              } 
+
+              
               $desk_code=GenerateDeskCode($branch->code);
                 if(Desk::where('branch_id',$user->branch_id)->where('user_id',$user->id)->where('status',1)->count()>0){
                 return redirect()->back()->with('success', 'This user is alerady exists with this branch, And the associated desk is active and working');
