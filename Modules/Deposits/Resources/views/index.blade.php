@@ -69,6 +69,7 @@ Deposits
               <tr>
                 <th>Desk Code</th>
                 <th>User</th>
+                <th>Bank Account No</th>
                 <th>Amount</th>
 <!--                 <th>Due Compensation</th>
                 <th>Paid Compensation</th>
@@ -112,6 +113,7 @@ $(document).ready( function(){
     columns: [
       {data: 'desk_id', name: 'desk_id'},
       {data: 'user_id', name: 'user_id'},
+      {data: 'bank_account_no', name: 'bank_account_no'},
       {data: 'amount', name: 'amount'},
 /*      {data: 'due_compensation', name: 'due_compensation'},
       {data: 'paid_compensation', name: 'paid_compensation'},

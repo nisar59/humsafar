@@ -3,6 +3,7 @@
     <tr>
       <th>Desk Code</th>
       <th>User</th>
+      <th>Account No</th>
       <th>Amount</th>
       <th>Deposit Slip No</th>
       <th>Deposit Date</th>
@@ -19,6 +20,11 @@
                 <td>
                     @if($deposit->user()->exists() && $deposit->user!=null)
                         {{ $deposit->user->name }}
+                    @endif  
+                </td>
+                <td>
+                    @if($deposit->user()->exists() && $deposit->user!=null)
+                        {{ $deposit->user->bank_account_no }}
                     @endif  
                 </td>
                 <td>

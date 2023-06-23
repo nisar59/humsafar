@@ -102,11 +102,17 @@ class DepositsController extends Controller
                         return $row->desk->desk_code;
                     }
                 })
-                ->editColumn('user_id', function ($row) {
+                ->addColumn('user_id', function ($row) {
                     if($row->user()->exists() && $row->user!=null){
                         return $row->user->name;
                     }                
                 })
+                ->editColumn('bank_account_no', function ($row) {
+                    if($row->user()->exists() && $row->user!=null){
+                        return $row->user->bank_account_no;
+                    }                
+                })
+
                 ->editColumn('amount', function ($row) {
                      return number_format($row->amount);
                  })
