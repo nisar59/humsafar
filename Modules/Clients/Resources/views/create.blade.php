@@ -74,6 +74,27 @@ Client
                   @endforeach
               </select>
             </div>
+            
+            <div class="col-md-4 form-group">
+              <label for="">Weight</label>
+              <input type="text" class="form-control" value="{{old('weight')}}" name="weight" placeholder="Weight">
+            </div>
+
+            <div class="col-md-4 form-group">
+              <label for="">Height</label>
+              <input type="text" class="form-control" value="{{old('height')}}" name="height" placeholder="Height">
+            </div>
+
+            <div class="col-md-4 form-group">
+              <label for="">Blood Group</label>
+              <select name="blood_group" class="form-control select2">
+                  <option value="">Select</option>
+                  @foreach(BloodGroups() as $bgkey=> $bg)
+                  <option value="{{$bgkey}}" @if(old('blood_group')==$bgkey) selected @endif>{{$bg}}</option>
+                  @endforeach
+              </select>
+            </div>
+
             <div class="col-md-4 form-group">
               <label for="">Relation</label>
               <select name="relation" class="form-control select2">
