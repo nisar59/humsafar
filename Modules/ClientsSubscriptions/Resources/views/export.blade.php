@@ -78,11 +78,9 @@
 
                 <td>
                     @if($client!=null)
-                       @if($client->marital_status==1)
-                        Married
-                       @else
-                        Single
-                       @endif
+                        @if(isset(MaritalStatus()[$client->marital_status]))
+                            {{ MaritalStatus()[$client->marital_status] }}
+                        @endif
                     @endif
                 </td>                 
 
