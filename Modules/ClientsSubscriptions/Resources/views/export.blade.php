@@ -86,13 +86,13 @@
 
                 <td>
                     @if($client!=null)
-                       {{$client->gender}}
+                       {{ucfirst($client->gender)}}
                     @endif
                 </td> 
 
                 <td>
                     @if($client!=null)
-                       {{$client->blood_group}}
+                       {{strtoupper($client->blood_group)}}
                     @endif
                 </td> 
 
