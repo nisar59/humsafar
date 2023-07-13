@@ -9,9 +9,11 @@
     <tbody>
         @if($data!=null)
             @foreach($data as $vl)
-                <tr>{{$vl['cnic']}}</tr>
-                <tr>{{$vl['username']}}</tr>
-                <tr>{{$vl['password']}}</tr>
+            <tr>
+                <td>{{$vl['cnic']}}</td>
+                <td>{{$vl['username']}}</td>
+                <td>{{$vl['password']}}</td>
+            </tr>
             @endforeach
         @endif
     </tbody>
