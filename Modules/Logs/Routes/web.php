@@ -29,9 +29,13 @@ Route::group(['prefix'=>'system-logs','middleware' => ['permission:logs.delete']
 });
 
 
-Route::group(['prefix'=>'import-export-logs','middleware' => ['permission:logs.delete']],function(){
+Route::group(['prefix'=>'import-export-logs','middleware' => ['permission:logs.view']],function(){
     Route::get('/', 'LogsController@importexportlogs');
     Route::get('/show/{id}', 'LogsController@importexportlogsshow');
+});
+
+
+Route::group(['prefix'=>'import-export-logs','middleware' => ['permission:logs.delete']],function(){
     Route::get('/destroy/{id}', 'LogsController@importexportlogsdestroy');
     Route::get('/truncate', 'LogsController@importexportlogstruncate');
 });
