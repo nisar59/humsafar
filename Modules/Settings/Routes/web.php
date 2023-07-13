@@ -21,7 +21,7 @@ Route::group(['prefix'=>'settings','middleware' => ['permission:settings.add']],
 });
 
 Route::group(['prefix'=>'settings','middleware' => ['permission:settings.add']],function(){
-    Route::POST('/theme', 'SettingsController@theme');
+    Route::POST('/sms-test', 'SettingsController@testsms');
 
 });
 

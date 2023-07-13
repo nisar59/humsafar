@@ -71,6 +71,38 @@ class SettingsController extends Controller
     }
 
 
+    public function testsms(Request $req)
+    {
+        $req->validate([
+            'phone'=>'required',
+            'text'=>'required',
+        ]);
+
+        try {
+            
+            //$msg="Humsafar Account is Activated. username :".$row['username']." password :".$row['password']. " , Contact us: 0309-8889395";
+
+            $msg_res=SendMessage($req->phone, $req->text);
+
+            if($msg_res->success){
+                return redirect()->back()->with('success', $msg_res->message);
+                
+            }else{
+                return redirect()->back()->with('warning', $msg_res->message);
+            }
+            
+            return redirect()->back()->with('warning', "No Response Found");
+
+         }catch(Throwable $e){
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }catch(Throwable $e){
+            return redirect()->back()->with('error', 'Something went wrong with this error: '.$e->getMessage());
+        }
+
+
+    }
+
+
     /**
      * Show the specified resource.
      * @param int $id
@@ -90,6 +122,7 @@ class SettingsController extends Controller
     {
         return view('settings::edit');
     }
+
 
     /**
      * Update the specified resource in storage.

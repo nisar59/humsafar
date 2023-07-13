@@ -110,6 +110,24 @@ $favicon=url('public/img/settings/'.$sett->portal_favicon);
                       <option value="0" {{$sett->sms_notifications==0 ? 'selected' : ''}}>Disabled</option>
                     </select>    
                   </div>
+                </div>
+                <div class="row" id="sendsms">
+                  <div class="col-12"><hr>
+                    <p class="fw-bold m-0">Test SMS Notifications</p>
+                  </div>
+                  <div class="col-12">
+                    <label for="">Phone No</label>
+                    <input type="number" name="phone" class="form-control" placeholder="Enter Phone No">
+                  </div>
+
+                  <div class="col-12">
+                    <label for="">Text</label>
+                    <textarea name="text"class="form-control" placeholder="Enter Text"></textarea>
+                  </div>
+
+                  <div class="col-12 text-end mt-2">
+                    <button type="button" id="sendsms-button" class="btn btn-info btn-sm">Send</button>
+                  </div>
                  </div>
                 </div>
                 <div class="tab-pane p-3" id="mobile-app-configurations" role="tabpanel">
@@ -140,4 +158,17 @@ $favicon=url('public/img/settings/'.$sett->portal_favicon);
 </form>
 @endsection
 @section('js')
+<script>
+  $(document).ready(function() {
+      $(document).on('click', '#sendsms-button', function() {
+        $("#sendsms").wrap('<form id="form-sendsms" action="{{ url('settings/sms-test/') }}" method="post"></form>');
+        $("#form-sendsms").prepend('@csrf');
+
+        $("#form-sendsms").submit();
+
+
+
+      });
+  });
+</script>
 @endsection
