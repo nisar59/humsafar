@@ -247,7 +247,7 @@ class ClientsSubscriptionsController extends Controller
                         $msg_res="And SMS Notification sent";
                     }else{
                         $client->clientsubscriptions()->update(['services'=>0]);
-                        $faulty[]=$row['cnic'];
+                        $faulty[]=$row;
                     }
 
                     /*/////////////////////////End SMS Notification////////////////////////*/
